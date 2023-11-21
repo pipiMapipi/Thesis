@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInteractable Interactable { get; set; }
     
     private Rigidbody2D rb;
+
     private Animator animator;
     private Vector2 moveDir;
     private Vector2 lastMoveDir;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
         animator = GetComponent<Animator>();
 
         for(int i = 0; i < hitBoxes.Length; i++)
@@ -48,14 +50,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (dialogueUI.IsOpen) return; // stop moving when talking
         }
+
+        if (canMove)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+        }
         
 
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        
-
-        if ((movement.x == 0 && movement.y == 0) && (moveDir.x != 0 || moveDir.y != 0))
+        if (canMove && (movement.x == 0 && movement.y == 0) && (moveDir.x != 0 || moveDir.y != 0))
         {
             lastMoveDir = moveDir;
         }

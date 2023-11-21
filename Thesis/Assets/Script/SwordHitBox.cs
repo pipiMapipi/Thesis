@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SwordHitBox : MonoBehaviour
 {
-    public float swordDamage = 1f;
+
+    [SerializeField] private float swordDamage = 1f;
+    [SerializeField] private float knockbackForce = 500f;
 
     private Collider2D swordCollider;
    
@@ -19,21 +21,31 @@ public class SwordHitBox : MonoBehaviour
         
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.collider.CompareTag("Monster"))
-    //    {
-    //        collision.collider.SendMessage("OnHit", swordDamage);
-    //    }
-    //}
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Monster"))
         {
-            collision.SendMessage("OnHit", swordDamage);
+            // check if there is IDamageable in the script of the gameobject
+            IDamageable damageableObject = collision.GetComponent<IDamageable>();
+            if (damageableObject != null)
+            {
+                // Calculate direction between avatar and monsters
+                Vector3 parentPos = transform.parent.position;
+                Vector2 direction = (Vector2)(collision.gameObject.transform.position - parentPos).normalized;
+                Vector2 knockback = direction * knockbackForce;
+
+                //collision.SendMessage("OnHit", swordDamage, knockback);
+                damageableObject.OnHit(swordDamage, knockback);
+            }
+            else
+            {
+                Debug.LogWarning("Collider does not implement IDmamageable");
+            }
+            
         }
+        
+        
     }
 }
 

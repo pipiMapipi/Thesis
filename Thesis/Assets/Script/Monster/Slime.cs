@@ -4,46 +4,31 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    [Header("Health")]
-    [SerializeField] private float _health = 3f;
 
-    private Animator animator;
+    [Header("Attack")]
+    [SerializeField] private float damage = 1f;
+    [SerializeField] private float knockbackForce = 100f;
 
-    // Property
-    public float Health
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        set
-        {
-            _health = value;
+        IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
-            if (_health <= 0)
+        if (collision.collider.CompareTag("Player"))
+        {
+            if (damageable != null)
             {
-                animator.SetTrigger("Death");
-                //Destroy(gameObject);
+                Vector2 direction = (Vector2)(collision.gameObject.transform.position - transform.position).normalized;
+                Vector2 knockback = direction * knockbackForce;
+
+                //collision.SendMessage("OnHit", swordDamage, knockback);
+                damageable.OnHit(damage);
             }
+            else
+            {
+                Debug.LogWarning("Collider does not implement IDmamageable");
+            }
+
         }
-
-        get
-        {
-            return _health;
-        }
-    }
-
-    void Start()
-    {
-        animator = gameObject.GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnHit(float damage)
-    {
-        Debug.Log("Hit");
-        Health -= damage;
-        animator.SetTrigger("Hit");
     }
 }
