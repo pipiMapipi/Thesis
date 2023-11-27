@@ -13,9 +13,16 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     [Header("Disable Physics")]
     [SerializeField] private bool disableSimulation = false;
 
+    [Header("Invincibility")]
+    [SerializeField] private float invincibilityTime = 0.8f;
+    [SerializeField] private bool invincibilityEnabled = true;
+    [SerializeField] private bool _invincible;
+
     private Animator animator;
     private Collider2D colliderPhysics;
     private Rigidbody2D rb;
+
+    private float invincibleTimeElapsed = 0f;
 
     // Property
     public float Health
@@ -58,6 +65,23 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    public bool Invincible
+    {
+        set
+        {
+            _invincible = value;
+            if(_invincible)
+            {
+                invincibleTimeElapsed = 0f;
+            }
+        }
+
+        get
+        {
+            return _invincible;
+        }
+    }
+
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -66,26 +90,47 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         colliderPhysics = GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-
+        if (Invincible)
+        {
+            invincibleTimeElapsed += Time.deltaTime;
+            if(invincibleTimeElapsed > invincibilityTime)
+            {
+                Invincible = false;
+            }
+        }
     }
 
     public void OnHit(float damage, Vector2 knockback)
     {
-        Debug.Log("Hit");
-        Health -= damage;
-        animator.SetTrigger("Hit");
+        if (!Invincible)
+        {
+            Health -= damage;
+            animator.SetTrigger("Hit");
 
-        rb.AddForce(knockback);
+            rb.AddForce(knockback, ForceMode2D.Impulse);
+
+            if (invincibilityEnabled)
+            {
+                Invincible = true;
+            }
+        }
     }
 
     public void OnHit(float damage)
     {
-        Debug.Log("Hit");
-        Health -= damage;
-        animator.SetTrigger("Hit");
+        if (!Invincible)
+        {
+            Health -= damage;
+            animator.SetTrigger("Hit");
+
+            if (invincibilityEnabled)
+            {
+                Invincible = true;
+            }
+        }
+        
     }
 
     public void Destroyself()

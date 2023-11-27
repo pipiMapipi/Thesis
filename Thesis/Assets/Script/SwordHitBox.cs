@@ -6,7 +6,7 @@ public class SwordHitBox : MonoBehaviour
 {
 
     [SerializeField] private float swordDamage = 1f;
-    [SerializeField] private float knockbackForce = 500f;
+    [SerializeField] private float knockbackForce = 20f;
 
     private Collider2D swordCollider;
    

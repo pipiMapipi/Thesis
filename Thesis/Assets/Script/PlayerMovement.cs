@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player Movement")]
     [SerializeField] float PlayerSpeed = 5f;
+    [SerializeField] float maxSpeed = 5f;
 
     [Header("Dialogue")]
     [SerializeField] private DialogueUI dialogueUI;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lastMoveDir;
 
     private Vector2 movement;
+    private float idleFriction = 0.6f;
 
     private bool canMove = true;
 
@@ -92,11 +94,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            rb.velocity = moveDir * PlayerSpeed;
+            //rb.velocity = moveDir * PlayerSpeed;
+            rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
+            if(rb.velocity.magnitude > maxSpeed)
+            {
+                float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
+                rb.velocity = rb.velocity.normalized * limitedSpeed;
+            }
         }
         else
         {
-            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, 0.6f);
+            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
         }
        
     }
