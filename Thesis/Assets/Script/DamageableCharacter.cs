@@ -5,7 +5,8 @@ using UnityEngine;
 public class DamageableCharacter : MonoBehaviour, IDamageable
 {
     [Header("Health")]
-    [SerializeField] private float _health = 3f;
+    [SerializeField] private float _health = 300f;
+    [SerializeField] private float _maxHealth = 300f;
 
     [Header("Targetable")]
     [SerializeField] private bool _targetable = true;
@@ -45,6 +46,17 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         }
     }
 
+    public float MaxHealth
+    {
+        set
+        {
+            _maxHealth = value;
+        }
+        get
+        {
+            return _maxHealth;
+        }
+    }
     public bool Targetable
     {
         set
@@ -88,6 +100,8 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
         rb = GetComponent<Rigidbody2D>();
         colliderPhysics = GetComponent<Collider2D>();
+
+        MaxHealth = Health;
     }
 
     private void FixedUpdate()

@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true;
 
     private Collider2D[] swordCollider = new Collider2D[4];
+
+    
     
     void Start()
     {
@@ -43,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         {
             swordCollider[i] = hitBoxes[i].GetComponent<Collider2D>();
         }
+
+        
     }
 
     // Update is called once per frame

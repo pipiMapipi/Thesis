@@ -4,6 +4,8 @@ public interface IDamageable
 {
     public float Health { set; get;  }
 
+    public float MaxHealth { set; get; }
+
     public bool Targetable { set; get;  }
 
     public bool Invincible { set; get;  }
