@@ -10,6 +10,15 @@ public class Slime : MonoBehaviour
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float moveSpeed = 200f;
 
+    [Header("Raycast")]
+    [SerializeField] private LayerMask layerMask;
+
+    [Header("Wander")]
+    [SerializeField] private float moveRange;
+    [SerializeField] private float maxDist;
+    private Vector2 wayPoint;
+    private bool playerDetected;
+
     private DetectionZone detectionZone;
     private Rigidbody2D rb;
     private Animator animator;
@@ -18,7 +27,11 @@ public class Slime : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    private Vector2 initPos;
+    private Vector3 initPos;
+
+    // Line of sights for detecting avatar
+    private bool hasLineOfSight;
+    private GameObject player;
 
     private void Awake()
     {
@@ -26,6 +39,11 @@ public class Slime : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         initPos = transform.position;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        SetWanderPos();
+        
     }
 
     private void FixedUpdate()
@@ -33,11 +51,22 @@ public class Slime : MonoBehaviour
         if (detectionZone.detectObjects.Count > 0)
         {
             Collider2D detectedObject = detectionZone.detectObjects[0];
-            if (detectedObject != null)
+            if (detectedObject != null && hasLineOfSight)
             {
                 direction = (detectedObject.transform.position - transform.position).normalized;
                 rb.AddForce(direction * moveSpeed * Time.deltaTime);
+                playerDetected = true;
             }
+        } else
+        {
+            if (!playerDetected)
+            {
+                direction = (wayPoint - (Vector2)transform.position).normalized;
+                rb.AddForce(direction * moveSpeed * Time.deltaTime);
+            }
+            StartCoroutine(MoveToWayPoint());
+            
+            //StartCoroutine(BackToInitPos(initPos));
         }
 
         horizontal = Mathf.Clamp(rb.velocity.x, -1, 1);
@@ -46,6 +75,20 @@ public class Slime : MonoBehaviour
         animator.SetFloat("Vertical", vertical);
 
         animator.SetFloat("Speed", rb.velocity.magnitude);
+
+        // Line of sight
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, player.transform.position - transform.position, layerMask);
+        if(ray.collider != null)
+        {
+            hasLineOfSight = ray.collider.CompareTag("Player");
+            if (hasLineOfSight)
+            {
+                Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.green);
+            }else
+            {
+                Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
+            }
+        }
     }
 
 
@@ -69,5 +112,41 @@ public class Slime : MonoBehaviour
             }
 
         }
+    }
+
+    private IEnumerator BackToInitPos(Vector3 initPos)
+    {
+        yield return new WaitForSeconds(3f);
+
+        direction = (initPos - transform.position).normalized;
+        rb.AddForce(direction * moveSpeed * Time.deltaTime);
+    }
+
+    private void SetWanderPos()
+    {
+        wayPoint = new Vector2(Random.Range(-maxDist, maxDist) + initPos.x, Random.Range(-maxDist, maxDist) + initPos.y);
+        
+
+    }
+
+    private IEnumerator MoveToWayPoint()
+    {
+        // Back to init zone
+        if (playerDetected)
+        {
+            yield return new WaitForSeconds(3f);
+            playerDetected = false;
+        }
+        else
+        {
+            if (Vector2.Distance(transform.position, wayPoint) < moveRange)
+            {
+                yield return new WaitForSeconds(2f);
+                SetWanderPos();
+                
+            }
+        }
+        
+
     }
 }

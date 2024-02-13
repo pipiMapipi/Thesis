@@ -17,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Hit Box")]
     [SerializeField] private GameObject[] hitBoxes;
 
+    [Header("Newbie")]
+    [SerializeField] Newbie newbie;
+    [SerializeField] float speedOffset = -100f;
+    [SerializeField] float maxSpeedOffset = -1f;
+
     public DialogueUI DialogueUI => dialogueUI;
     public PlayerInteractable Interactable { get; set; }
     
@@ -98,13 +103,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            //rb.velocity = moveDir * PlayerSpeed;
-            rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
-            if(rb.velocity.magnitude > maxSpeed)
-            {
-                float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
-                rb.velocity = rb.velocity.normalized * limitedSpeed;
+            if (newbie.isCarrying) {
+                rb.AddForce(moveDir * (PlayerSpeed + speedOffset) * Time.deltaTime);
+                if (rb.velocity.magnitude > maxSpeed)
+                {
+                    float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed + maxSpeedOffset, idleFriction);
+                    rb.velocity = rb.velocity.normalized * limitedSpeed;
+                }
             }
+            else
+            {
+                rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
+                if (rb.velocity.magnitude > maxSpeed)
+                {
+                    float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
+                    rb.velocity = rb.velocity.normalized * limitedSpeed;
+                }
+            }
+            
         }
         else
         {
