@@ -10,6 +10,8 @@ public class TrapAttack : MonoBehaviour
 
     [SerializeField] private Camera cam;
 
+    
+
     private Quaternion rotation;
 
     private int seedCount = 5;
@@ -17,9 +19,9 @@ public class TrapAttack : MonoBehaviour
     private bool hasResetList;
     private bool hasInitAttack;
 
-    void Start()
+    void OnEnable()
     {
-        
+        hasInitAttack = false;
     }
 
     // Update is called once per frame

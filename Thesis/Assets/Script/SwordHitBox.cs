@@ -9,10 +9,12 @@ public class SwordHitBox : MonoBehaviour
     [SerializeField] private float knockbackForce = 20f;
 
     private Collider2D swordCollider;
+    private Transform player;
    
     void Start()
     {
         swordCollider = gameObject.GetComponent<Collider2D>();
+        player = transform.parent.transform;
     }
 
     // Update is called once per frame
@@ -37,6 +39,12 @@ public class SwordHitBox : MonoBehaviour
 
                 //collision.SendMessage("OnHit", swordDamage, knockback);
                 damageableObject.OnHit(swordDamage, knockback);
+
+                float enemyHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
+                if(enemyHealth == 0)
+                {
+                    player.GetComponent<DamageableCharacter>().Aggro += 0.5f;
+                }
             }
             else
             {

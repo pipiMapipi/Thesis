@@ -94,9 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8790685933616057635}
   - component: {fileID: 3044340155428725713}
+  - component: {fileID: 4164470223625569422}
   - component: {fileID: 8197764024224255028}
   - component: {fileID: 7363922852942728969}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DamageCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +171,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4164470223625569422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475982875879619161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fad008097f3f4641bf44236e2999c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &8197764024224255028
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -320,10 +333,13 @@ MonoBehaviour:
   groundVel: {x: 0, y: 0}
   verticalVel: 0
   isGrounded: 0
-  maxRadius: 2.7
+  maxRadius: 5
   expandTime: 3
   explodeTime: 2.2
   trapAnim: {fileID: 7363922852942728969}
+  seedDamage: 1.5
+  knockbackForce: 20
+  applyDamage: 0
 --- !u!1 &6980223044724137038
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,11 @@ public class FakeHeight : MonoBehaviour
     [SerializeField] private float expandTime;
     [SerializeField] private float explodeTime;
     [SerializeField] private Animator trapAnim;
+
+    [Header("Damage")]
+    public float seedDamage;
+    public float knockbackForce = 20f;
+    public bool applyDamage;
     
 
     private float lastInitialVerticalVel;
@@ -33,11 +38,15 @@ public class FakeHeight : MonoBehaviour
     private float elapsedTime;
     private bool startExplosion;
 
+    
+
 
     void Start()
     {
         damageSprite = damageArea.GetComponent<SpriteRenderer>();
         expansionStep = 0;
+
+        
     }
 
     // Update is called once per frame
@@ -139,6 +148,7 @@ public class FakeHeight : MonoBehaviour
         
         if(explosionStart > explodeTime)
         {
+            applyDamage = true;
             Destroy(gameObject);
         }
         else
@@ -147,5 +157,7 @@ public class FakeHeight : MonoBehaviour
         }
 
     }
+
+    
 
 }

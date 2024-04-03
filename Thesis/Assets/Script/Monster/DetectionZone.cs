@@ -22,7 +22,7 @@ public class DetectionZone : MonoBehaviour
     // Detect when objects enter range
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Newbie"))
         {
             detectObjects.Add(collision);
         }
@@ -32,7 +32,7 @@ public class DetectionZone : MonoBehaviour
     // Detect when objects exit range
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Newbie"))
         {
             detectObjects.Remove(collision);
         }

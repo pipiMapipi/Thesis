@@ -19,6 +19,10 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     [SerializeField] private bool invincibilityEnabled = true;
     [SerializeField] private bool _invincible;
 
+    [Header("Density")]
+    [SerializeField] private float _density;
+    [SerializeField] private float _aggro;
+
     private Animator animator;
     private Collider2D colliderPhysics;
     private Rigidbody2D rb;
@@ -91,6 +95,31 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         get
         {
             return _invincible;
+        }
+    }
+
+    public float Density
+    {
+        set
+        {
+            _density = value;
+        }
+
+        get
+        {
+            return _density;
+        }
+    }
+
+    public float Aggro
+    {
+        set
+        {
+            _aggro = value;
+        }
+        get
+        {
+            return _aggro;
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Slime : MonoBehaviour
 {
@@ -11,11 +12,19 @@ public class Slime : MonoBehaviour
     [SerializeField] private float moveSpeed = 200f;
 
     [Header("Raycast")]
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMaskSlime;
 
     [Header("Wander")]
     [SerializeField] private float moveRange;
     [SerializeField] private float maxDist;
+
+
+    private Transform[] targets = new Transform[2];
+    private NavMeshAgent agent;
+    private Transform target;
+    private string tag;
+
+    
     private Vector2 wayPoint;
     private bool playerDetected;
 
@@ -32,6 +41,7 @@ public class Slime : MonoBehaviour
     // Line of sights for detecting avatar
     private bool hasLineOfSight;
     private GameObject player;
+    private GameObject newbie;
 
     private void Awake()
     {
@@ -41,22 +51,44 @@ public class Slime : MonoBehaviour
         initPos = transform.position;
 
         player = GameObject.FindGameObjectWithTag("Player");
+        newbie = GameObject.FindGameObjectWithTag("Newbie");
         
         SetWanderPos();
-        
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+        targets[0] = player.transform;
+        targets[1] = newbie.transform;
     }
 
     private void FixedUpdate()
     {
+        CheckAggro();
+
         if (detectionZone.detectObjects.Count > 0)
         {
-            Collider2D detectedObject = detectionZone.detectObjects[0];
-            if (detectedObject != null && hasLineOfSight)
+            for (int i = 0; i < detectionZone.detectObjects.Count; i++)
             {
-                direction = (detectedObject.transform.position - transform.position).normalized;
-                rb.AddForce(direction * moveSpeed * Time.deltaTime);
-                playerDetected = true;
+                if (detectionZone.detectObjects[i].CompareTag(tag))
+                {
+                    Collider2D detectedObject = detectionZone.detectObjects[i];
+
+                    if (detectedObject != null && hasLineOfSight)
+                    {
+                        //direction = (detectedObject.transform.position - transform.position).normalized;
+                        //rb.AddForce(direction * moveSpeed * Time.deltaTime);
+
+                        agent.SetDestination(target.position);
+                        playerDetected = true;
+                    }
+                }
+
+                
             }
+             
+            
         } else
         {
             if (!playerDetected)
@@ -77,16 +109,17 @@ public class Slime : MonoBehaviour
         animator.SetFloat("Speed", rb.velocity.magnitude);
 
         // Line of sight
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, player.transform.position - transform.position, layerMask);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, (Vector2)(GameObject.FindGameObjectWithTag(tag).transform.position - transform.position).normalized, (GameObject.FindGameObjectWithTag(tag).transform.position - transform.position).magnitude, layerMaskSlime);
         if(ray.collider != null)
         {
-            hasLineOfSight = ray.collider.CompareTag("Player");
+
+            hasLineOfSight = ray.collider.CompareTag(tag);
             if (hasLineOfSight)
             {
-                Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.green);
+                Debug.DrawRay(transform.position, GameObject.FindGameObjectWithTag(tag).transform.position - transform.position, Color.green);
             }else
             {
-                Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.red);
+                Debug.DrawRay(transform.position, GameObject.FindGameObjectWithTag(tag).transform.position - transform.position, Color.red);
             }
         }
     }
@@ -96,7 +129,7 @@ public class Slime : MonoBehaviour
     {
         IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Newbie"))
         {
             if (damageable != null)
             {
@@ -148,5 +181,25 @@ public class Slime : MonoBehaviour
         }
         
 
+    }
+
+    private void CheckAggro()
+    {
+        float[] aggro = new float[2];
+        for(int i = 0; i < targets.Length; i++)
+        {
+            aggro[i] = targets[i].GetComponent<DamageableCharacter>().Aggro;
+        }
+        
+        if(aggro[0] >= aggro[1])
+        {
+            target = targets[0];
+            tag = "Player";
+        }
+        else
+        {
+            target = targets[1];
+            tag = "Newbie";
+        }
     }
 }

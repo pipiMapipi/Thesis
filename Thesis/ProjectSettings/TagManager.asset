@@ -9,6 +9,7 @@ TagManager:
   - Newbie
   - ShieldBreaker
   - Shielded
+  - Zone
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
-  - 
-  - 
+  - EnemySelf
+  - Newbie
+  - EnemyDetect
   - 
   - 
   - 
