@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb23f434257201145a7e1632886cbbe2
+guid: 94d020f705ce2d74192f775a04e1784b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,11 +123,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: health_0
+      name: avatarAnim_walkright-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -137,82 +137,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 702690e73739c514eb84fe6eedec166c
-      internalID: 1891287136
+      spriteID: 69a1517e0758b2d459e69c5e590fede3
+      internalID: 1575222706
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: health_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 128
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 993d4151922ee28418aca99762dcfce9
-      internalID: 694072959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b63690b6da070d4c834ad28e0aad447
-      internalID: 1436879604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 128
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8d9b6b50f888cb40b4e72253d2a8891
-      internalID: 582102133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_10
+      name: avatarAnim_walkright-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 128
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -221,8 +158,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 498ef0f028c52564f8ea39714e135ef4
-      internalID: -1301134679
+      spriteID: 877c2dabd3e6ddd499e3605ccd990013
+      internalID: -2128029884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatarAnim_walkright-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dafbb927879718247a59c33fa8e52539
+      internalID: -1006814952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatarAnim_walkright-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f11e22e34e10744ac84690bbc99ec1
+      internalID: 1793949753
       vertices: []
       indices: 
       edges: []
@@ -238,20 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      health_0: 1891287136
-      health_1: 694072959
-      health_10: -1301134679
-      health_11: -1258720374
-      health_12: -464633401
-      health_13: 921670344
-      health_2: 1408700319
-      health_3: 1170556862
-      health_4: -404258566
-      health_5: 1436879604
-      health_6: 582102133
-      health_7: 1103936488
-      health_8: -286207719
-      health_9: -1152605888
+      avatarAnim_walkright-Sheet_0: 1575222706
+      avatarAnim_walkright-Sheet_1: -2128029884
+      avatarAnim_walkright-Sheet_2: -1006814952
+      avatarAnim_walkright-Sheet_3: 1793949753
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

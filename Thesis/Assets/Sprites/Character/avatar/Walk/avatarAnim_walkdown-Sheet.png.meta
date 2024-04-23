@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb23f434257201145a7e1632886cbbe2
+guid: 8d76d96947805ba40ae89a32d0995ee5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,11 +123,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: health_0
+      name: avatarAnim_walkdown-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -137,82 +137,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 702690e73739c514eb84fe6eedec166c
-      internalID: 1891287136
+      spriteID: c48e05421324a8e46bdae8db3610cc8b
+      internalID: 210462160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: health_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 128
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 993d4151922ee28418aca99762dcfce9
-      internalID: 694072959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b63690b6da070d4c834ad28e0aad447
-      internalID: 1436879604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 128
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8d9b6b50f888cb40b4e72253d2a8891
-      internalID: 582102133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: health_10
+      name: avatarAnim_walkdown-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 128
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -221,8 +158,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 498ef0f028c52564f8ea39714e135ef4
-      internalID: -1301134679
+      spriteID: 7812ae97c5cc7d343beb23761fe466b1
+      internalID: 1555336633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatarAnim_walkdown-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b9b7d9568066842a37874264f044ca
+      internalID: 1724922964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatarAnim_walkdown-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89038152c53cbbf428cbf7763b7993dd
+      internalID: -850684755
       vertices: []
       indices: 
       edges: []
@@ -238,20 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      health_0: 1891287136
-      health_1: 694072959
-      health_10: -1301134679
-      health_11: -1258720374
-      health_12: -464633401
-      health_13: 921670344
-      health_2: 1408700319
-      health_3: 1170556862
-      health_4: -404258566
-      health_5: 1436879604
-      health_6: 582102133
-      health_7: 1103936488
-      health_8: -286207719
-      health_9: -1152605888
+      avatarAnim_walkdown-Sheet_0: 210462160
+      avatarAnim_walkdown-Sheet_1: 1555336633
+      avatarAnim_walkdown-Sheet_2: 1724922964
+      avatarAnim_walkdown-Sheet_3: -850684755
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

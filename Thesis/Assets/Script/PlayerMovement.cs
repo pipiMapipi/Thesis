@@ -103,24 +103,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            if (newbie.isCarrying) {
-                rb.AddForce(moveDir * (PlayerSpeed + speedOffset) * Time.deltaTime);
-                if (rb.velocity.magnitude > maxSpeed)
-                {
-                    float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed + maxSpeedOffset, idleFriction);
-                    rb.velocity = rb.velocity.normalized * limitedSpeed;
-                }
-            }
-            else
+            //if (newbie.isCarrying) {
+            //    rb.AddForce(moveDir * (PlayerSpeed + speedOffset) * Time.deltaTime);
+            //    if (rb.velocity.magnitude > maxSpeed)
+            //    {
+            //        float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed + maxSpeedOffset, idleFriction);
+            //        rb.velocity = rb.velocity.normalized * limitedSpeed;
+            //    }
+            //}
+            //else
+            //{
+
+            //}
+            rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
+            if (rb.velocity.magnitude > maxSpeed)
             {
-                rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
-                if (rb.velocity.magnitude > maxSpeed)
-                {
-                    float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
-                    rb.velocity = rb.velocity.normalized * limitedSpeed;
-                }
+                float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
+                rb.velocity = rb.velocity.normalized * limitedSpeed;
             }
-            
+
         }
         else
         {
