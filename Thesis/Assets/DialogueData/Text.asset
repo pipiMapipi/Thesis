@@ -13,12 +13,22 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   dialogue:
-  - Sorry I am late.
-  - You wanna get to the other side, right?
-  - 'Give me a second...
+  - "Sorry, I wasn\u2019t supposed to... Oh hi, it\u2019s you! How have things been
+    going?"
+  - Me? I am doing pretty well, I guess? You know, just getting trained every day,
+    getting into battles, getting beaten up, going into fights again, discovering
+    treasures sometimes...
+  - 'Tough but rewarding, I would say.
 
-    Let me find the right equipment.'
-  - 'Sorry for waiting.
-
-    Now press SPACE bar.'
-  - Off you go!
+    I could feel myself leveling up...I hope. '
+  - Look, I know that your destination is the castle. So, I was wondering... if you
+    would... you know... if we can still do what we did before...
+  - "I mean... You don\u2019t mind if I team up again with you, right? Trust me,
+    this time I will be much better."
+  - "Uh, just look at this weapon that I got! I am still getting used to it, but
+    I can feel its power there. \nWith my weapon and your skills, we\u2019re gonna
+    nail every combat. "
+  - "But if you are not feeling comfortable, it\u2019s totally... Wait, what? You
+    said that I\u2019m in? That\u2019s... that\u2019s so nice of you! I won\u2019t
+    let you down."
+  - Anyhow, I am really glad to see you again!

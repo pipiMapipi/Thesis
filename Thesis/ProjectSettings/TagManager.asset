@@ -10,6 +10,7 @@ TagManager:
   - ShieldBreaker
   - Shielded
   - Zone
+  - CinemaEffect
   layers:
   - Default
   - TransparentFX

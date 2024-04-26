@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxSpeedOffset = -1f;
 
     public DialogueUI DialogueUI => dialogueUI;
+    
     public PlayerInteractable Interactable { get; set; }
     
     private Rigidbody2D rb;
@@ -61,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (dialogueUI.IsOpen) return; // stop moving when talking
         }
+
 
         if (canMove)
         {
