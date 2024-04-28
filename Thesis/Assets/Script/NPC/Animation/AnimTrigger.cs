@@ -140,7 +140,7 @@ public class AnimTrigger : MonoBehaviour
         }
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInput>().enabled = true;
-
+        DestroyObject(gameObject);
     }
 
     
