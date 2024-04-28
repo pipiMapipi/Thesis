@@ -11,6 +11,8 @@ TagManager:
   - Shielded
   - Zone
   - CinemaEffect
+  - Emotion
+  - CamBorder
   layers:
   - Default
   - TransparentFX

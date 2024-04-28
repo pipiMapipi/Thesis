@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class AnimTrigger : MonoBehaviour
 {
     [SerializeField] private float zoomInSize = 2.6f;
+    [SerializeField] private List<int> emotionIndex = new List<int>();
 
     private Camera cam;
     private CameraFollow cameraFollow;
@@ -21,6 +22,9 @@ public class AnimTrigger : MonoBehaviour
     private AnimEvent animEvent;
     private Animator cinemaEffect;
 
+    private GameObject emotionCanvas;
+    private EmotionUI emotionUI;
+
     void Start()
     {
         anim = transform.parent.transform.GetComponent<Animator>();
@@ -35,6 +39,14 @@ public class AnimTrigger : MonoBehaviour
 
         animEvent = transform.parent.transform.GetComponent<AnimEvent>();
         cinemaEffect = GameObject.FindGameObjectWithTag("CinemaEffect").GetComponent<Animator>();
+
+        emotionCanvas = GameObject.FindGameObjectWithTag("Emotion");
+        emotionUI = GameObject.FindGameObjectWithTag("Emotion").GetComponent<EmotionUI>();
+        for(int i = 0; i < emotionCanvas.transform.childCount; i++)
+        {
+            emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -72,6 +84,12 @@ public class AnimTrigger : MonoBehaviour
             player.GetComponent<PlayerMovement>().enabled = false;
             player.GetComponent<PlayerInput>().enabled = false;
 
+
+            for (int i = 0; i < emotionCanvas.transform.childCount; i++)
+            {
+                emotionCanvas.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            emotionUI.CurrentEmotion(emotionIndex[0]);
             StartCoroutine(InitCam());
             StartCoroutine(StartAnimation());
         }
@@ -108,10 +126,18 @@ public class AnimTrigger : MonoBehaviour
             lerpDir = -1;
         }
         yield return new WaitForSeconds(1f);
+        emotionUI.CurrentEmotion(emotionIndex[1]);
         cameraFollow.target = player.transform;
         cameraFollow.offset = new Vector3(0f, 0f, -10f);
         yield return new WaitForSeconds(cameraFollow.smoothTime);
         cinemaEffect.SetBool("InitVFX", false);
+        yield return new WaitForSeconds(1f);
+        emotionUI.AnimFadeOut();
+        yield return new WaitForSeconds(0.3f);
+        for (int i = 0; i < emotionCanvas.transform.childCount; i++)
+        {
+            emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
+        }
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInput>().enabled = true;
 
