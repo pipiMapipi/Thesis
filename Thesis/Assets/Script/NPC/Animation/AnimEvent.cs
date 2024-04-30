@@ -10,4 +10,5 @@ public class AnimEvent : MonoBehaviour
     {
         animEnd = true;
     }
+
 }

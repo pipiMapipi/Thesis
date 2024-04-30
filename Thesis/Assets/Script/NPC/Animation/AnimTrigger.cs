@@ -8,6 +8,15 @@ public class AnimTrigger : MonoBehaviour
     [SerializeField] private float zoomInSize = 2.6f;
     [SerializeField] private List<int> emotionIndex = new List<int>();
 
+    [Header("Fullscreen Animation")]
+    [SerializeField] private bool hasFSAnim;
+    [SerializeField] private List<GameObject> FSAnim = new List<GameObject>();
+
+    [Header("Transition Animation")]
+    [SerializeField] private bool hasTransitAnim;
+    [SerializeField] private GameObject transitAnim;
+
+
     private Camera cam;
     private CameraFollow cameraFollow;
     private Animator anim;
@@ -24,6 +33,13 @@ public class AnimTrigger : MonoBehaviour
 
     private GameObject emotionCanvas;
     private EmotionUI emotionUI;
+
+    private bool FSAnimPlayed = false;
+    private bool FSAnimEnded;
+    private int currentAnimIndex = 0;
+    private bool playFSAnimsTrigger = false;
+
+    private bool transitAnimEnded;
 
     void Start()
     {
@@ -67,6 +83,11 @@ public class AnimTrigger : MonoBehaviour
             }
         }
 
+        if (playFSAnimsTrigger)
+        {
+            PlayFSAnims();
+        }
+
         if (animEvent.animEnd)
         {
             StartCoroutine(SetCamToDefault());
@@ -78,10 +99,14 @@ public class AnimTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerAnim.SetFloat("Horizontal", 0f);
-            playerAnim.SetFloat("Vertical", 0f);
-            playerAnim.SetFloat("Speed", 0f);
-            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<PlayerMovement>().stopMovementInput = true;
+            player.GetComponent<PlayerMovement>().movement = Vector2.zero;
+            
+            
+            //playerAnim.SetFloat("Horizontal", 0f);
+            //playerAnim.SetFloat("Vertical", 0f);
+            //playerAnim.SetFloat("Speed", 0f);
+            
             player.GetComponent<PlayerInput>().enabled = false;
 
 
@@ -120,28 +145,97 @@ public class AnimTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7f);
         
+        
+        emotionUI.CurrentEmotion(emotionIndex[1]);
+        cameraFollow.target = player.transform;
+        cameraFollow.offset = new Vector3(0f, 0f, -10f);
+        yield return new WaitForSeconds(cameraFollow.smoothTime);
         if (cam.GetComponent<Camera>().orthographicSize < sizeDefault)
         {
             camStart = true;
             lerpDir = -1;
         }
         yield return new WaitForSeconds(1f);
-        emotionUI.CurrentEmotion(emotionIndex[1]);
-        cameraFollow.target = player.transform;
-        cameraFollow.offset = new Vector3(0f, 0f, -10f);
-        yield return new WaitForSeconds(cameraFollow.smoothTime);
-        cinemaEffect.SetBool("InitVFX", false);
-        yield return new WaitForSeconds(1f);
-        emotionUI.AnimFadeOut();
-        yield return new WaitForSeconds(0.3f);
-        for (int i = 0; i < emotionCanvas.transform.childCount; i++)
+        
+
+        if (!hasFSAnim)
         {
-            emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
+            cinemaEffect.SetBool("InitVFX", false);
+            yield return new WaitForSeconds(0.7f);
+            emotionUI.AnimFadeOut();
+            yield return new WaitForSeconds(0.3f);
+            for (int i = 0; i < emotionCanvas.transform.childCount; i++)
+            {
+                emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
+            }
+
+            player.GetComponent<PlayerMovement>().stopMovementInput = false;
+            player.GetComponent<PlayerInput>().enabled = true;
+            DestroyObject(gameObject);
         }
-        player.GetComponent<PlayerMovement>().enabled = true;
-        player.GetComponent<PlayerInput>().enabled = true;
-        DestroyObject(gameObject);
+        else
+        {
+            if (!FSAnimEnded)
+            {
+                emotionUI.AnimFadeOut();
+                yield return new WaitForSeconds(0.3f);
+                for (int i = 0; i < emotionCanvas.transform.childCount; i++)
+                {
+                    emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
+                }
+                yield return new WaitForSeconds(1f);
+                if (!FSAnimPlayed) playFSAnimsTrigger = true;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+                cinemaEffect.SetBool("InitVFX", false);
+                yield return new WaitForSeconds(1f);
+
+                player.GetComponent<PlayerMovement>().stopMovementInput = false;
+                player.GetComponent<PlayerInput>().enabled = true;
+                DestroyObject(gameObject);
+            }
+            
+            
+        }
+        
     }
 
-    
+
+    private void PlayFSAnims()
+    {
+        
+        FSAnimPlayed = true;
+        if (currentAnimIndex >= FSAnim.Count)
+        {
+            FSAnimEnded = true;            
+            return;
+        }
+
+        FSAnim[currentAnimIndex].SetActive(true);
+        AnimEvent animEvent = FSAnim[currentAnimIndex].GetComponent<AnimEvent>();
+        if (animEvent.animEnd)
+        {
+            FSAnim[currentAnimIndex].SetActive(false);
+            currentAnimIndex++;
+            FSAnimPlayed = false;
+        } 
+    }
+
+
+    private void PlayTransitAnim()
+    {
+        transitAnim.SetActive(true);
+        AnimEvent animEvent = transitAnim.GetComponent<AnimEvent>();
+        if (animEvent.animEnd)
+        {
+            transitAnimEnded = true;
+        }
+    }
+
+    private void CameraPan(Vector2 startPos, Vector2 endPos)
+    {
+        cam.transform.position = Vector2.Lerp(startPos, endPos, changeSpeed);
+    }
 }

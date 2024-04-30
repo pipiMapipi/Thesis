@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] float PlayerSpeed = 5f;
     [SerializeField] float maxSpeed = 5f;
+    public Vector2 movement;
+    public bool stopMovementInput;
+    
 
     [Header("Dialogue")]
     [SerializeField] private DialogueUI dialogueUI;
@@ -32,10 +35,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDir;
     private Vector2 lastMoveDir;
 
-    private Vector2 movement;
+    
     private float idleFriction = 0.6f;
-
     private bool canMove = true;
+
 
     private Collider2D[] swordCollider = new Collider2D[4];
 
@@ -64,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (canMove)
+        if (canMove && !stopMovementInput)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
