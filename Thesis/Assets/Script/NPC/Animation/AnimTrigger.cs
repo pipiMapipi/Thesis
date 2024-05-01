@@ -16,6 +16,10 @@ public class AnimTrigger : MonoBehaviour
     [SerializeField] private bool hasTransitAnim;
     [SerializeField] private GameObject transitAnim;
 
+    [Header("Add to Scene")]
+    [SerializeField] private bool hasNewObject;
+    [SerializeField] private List<GameObject> newObjects = new List<GameObject>();
+
 
     private Camera cam;
     private CameraFollow cameraFollow;
@@ -38,8 +42,6 @@ public class AnimTrigger : MonoBehaviour
     private bool FSAnimEnded;
     private int currentAnimIndex = 0;
     private bool playFSAnimsTrigger = false;
-
-    private bool transitAnimEnded;
 
     void Start()
     {
@@ -68,7 +70,20 @@ public class AnimTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(camStart)
+        if (hasTransitAnim)
+        {
+            if (transitAnim.GetComponent<TransitAnimation>().transitAnimEnd)
+            {
+                if (!FSAnimPlayed) playFSAnimsTrigger = true;
+            }
+
+            if (transitAnim.GetComponent<TransitAnimation>().camOverwrite) return;
+
+        }
+
+        
+
+        if (camStart)
         {
             changeSpeed += Time.deltaTime * lerpDir;
             cam.GetComponent<Camera>().orthographicSize = Mathf.Lerp(sizeDefault, zoomInSize, changeSpeed);
@@ -82,6 +97,10 @@ public class AnimTrigger : MonoBehaviour
                 changeSpeed = 0f;
             }
         }
+
+        
+
+        
 
         if (playFSAnimsTrigger)
         {
@@ -144,11 +163,14 @@ public class AnimTrigger : MonoBehaviour
     private IEnumerator SetCamToDefault()
     {
         yield return new WaitForSeconds(0.7f);
-        
-        
+
         emotionUI.CurrentEmotion(emotionIndex[1]);
-        cameraFollow.target = player.transform;
-        cameraFollow.offset = new Vector3(0f, 0f, -10f);
+        if (!hasTransitAnim || (hasTransitAnim && !transitAnim.GetComponent<TransitAnimation>().camOverwrite))
+        {
+            cameraFollow.target = player.transform;
+            cameraFollow.offset = new Vector3(0f, 0f, -10f);
+        } 
+        
         yield return new WaitForSeconds(cameraFollow.smoothTime);
         if (cam.GetComponent<Camera>().orthographicSize < sizeDefault)
         {
@@ -171,7 +193,7 @@ public class AnimTrigger : MonoBehaviour
 
             player.GetComponent<PlayerMovement>().stopMovementInput = false;
             player.GetComponent<PlayerInput>().enabled = true;
-            DestroyObject(gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -184,17 +206,28 @@ public class AnimTrigger : MonoBehaviour
                     emotionCanvas.transform.GetChild(i).gameObject.SetActive(false);
                 }
                 yield return new WaitForSeconds(1f);
-                if (!FSAnimPlayed) playFSAnimsTrigger = true;
+                if (hasTransitAnim)
+                {
+                    transitAnim.SetActive(true);
+                }
+                else
+                {
+                    if (!FSAnimPlayed) playFSAnimsTrigger = true;
+                }
+                
             }
             else
             {
+                if (hasNewObject) AddNewObjectToScene();
                 yield return new WaitForSeconds(1f);
                 cinemaEffect.SetBool("InitVFX", false);
                 yield return new WaitForSeconds(1f);
 
                 player.GetComponent<PlayerMovement>().stopMovementInput = false;
                 player.GetComponent<PlayerInput>().enabled = true;
-                DestroyObject(gameObject);
+                
+                Destroy(transitAnim);
+                Destroy(gameObject);
             }
             
             
@@ -223,19 +256,12 @@ public class AnimTrigger : MonoBehaviour
         } 
     }
 
-
-    private void PlayTransitAnim()
+    private void AddNewObjectToScene()
     {
-        transitAnim.SetActive(true);
-        AnimEvent animEvent = transitAnim.GetComponent<AnimEvent>();
-        if (animEvent.animEnd)
+        foreach(GameObject newObject in newObjects)
         {
-            transitAnimEnded = true;
+            newObject.SetActive(true);
         }
     }
 
-    private void CameraPan(Vector2 startPos, Vector2 endPos)
-    {
-        cam.transform.position = Vector2.Lerp(startPos, endPos, changeSpeed);
-    }
 }

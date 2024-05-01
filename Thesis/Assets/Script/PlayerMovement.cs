@@ -8,11 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
 
     [Header("Player Movement")]
-    [SerializeField] float PlayerSpeed = 5f;
+    public float PlayerSpeed = 5f;
     [SerializeField] float maxSpeed = 5f;
     public Vector2 movement;
     public bool stopMovementInput;
-    
+    public Vector2 moveDir;
+
 
     [Header("Dialogue")]
     [SerializeField] private DialogueUI dialogueUI;
@@ -25,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speedOffset = -100f;
     [SerializeField] float maxSpeedOffset = -1f;
 
+    [Header("Anim Intervene")]
+    public bool animControll;
+
     public DialogueUI DialogueUI => dialogueUI;
     
     public PlayerInteractable Interactable { get; set; }
@@ -32,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private Animator animator;
-    private Vector2 moveDir;
+    
     private Vector2 lastMoveDir;
 
     
@@ -67,10 +71,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (canMove && !stopMovementInput)
+        if (canMove && !stopMovementInput && !animControll)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
+        }else if (animControll) {
+            movement.x = Mathf.Clamp(rb.velocity.x, -1, 1);
+            movement.y = Mathf.Clamp(rb.velocity.y, -1, 1);
         }
         
 
@@ -79,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             lastMoveDir = moveDir;
         }
 
-        moveDir = new Vector2(movement.x, movement.y).normalized;
+        if (!animControll) moveDir = new Vector2(movement.x, movement.y).normalized;
 
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);

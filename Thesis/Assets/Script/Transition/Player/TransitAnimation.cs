@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class TransitAnimation : MonoBehaviour
 {
-    public Vector2 targetPos;
+    [Header("Move Player")]
+    public Transform targetPos;
     public float moveSpeed;
+    [Header("Camera Movement")]
     public float zoomInSize;
-    public bool transitAnimEnd;
     public Transform camPanEndPos;
+    [SerializeField] private Animator focusObjectAnim;
+    [Header("Inform AnimTrigger")]
+    public bool transitAnimEnd;
+    public bool camOverwrite;
 
     private GameObject player;
-    private Rigidbody2D rb;
-    private Vector2 direction;
     private Animator anim;
 
     private Camera cam;
@@ -21,13 +24,14 @@ public class TransitAnimation : MonoBehaviour
     private bool camZoomStart;
     private float changeSpeed;
     private int lerpDir;
+    private float playerSpeedDefault;
 
 
     private bool transitStarted;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        rb = player.GetComponent<Rigidbody2D>();
+        playerSpeedDefault = player.GetComponent<PlayerMovement>().PlayerSpeed;
         anim = GetComponent<Animator>();
         anim.enabled = false;
 
@@ -39,10 +43,17 @@ public class TransitAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToPosition();
-        if(Vector2.Distance(transform.position, targetPos) < 0.1f && !transitStarted)
+        if(!transitAnimEnd) MoveToPosition();
+        if (Vector2.Distance(player.transform.position, targetPos.position) < 0.1f)
         {
-            StartCoroutine(InitTransitionAnim());
+            player.transform.position = targetPos.position;
+            if (!transitStarted) StartCoroutine(InitTransitionAnim());
+            
+        }
+        else
+        {
+            
+            player.GetComponent<PlayerMovement>().animControll = true;
         }
 
         if (camZoomStart)
@@ -64,30 +75,44 @@ public class TransitAnimation : MonoBehaviour
 
     private void MoveToPosition()
     {
-        direction = (targetPos - (Vector2)transform.position).normalized;
-        rb.AddForce(direction * moveSpeed * Time.deltaTime);
+        player.GetComponent<PlayerMovement>().moveDir = (targetPos.position - player.transform.position).normalized;
+        player.GetComponent<PlayerMovement>().PlayerSpeed = moveSpeed;
+        //rb.AddForce(direction * moveSpeed * Time.deltaTime);
+
     }
 
     private IEnumerator InitTransitionAnim()
     {
+        //player.GetComponent<PlayerMovement>().animControll = false;
+        //player.GetComponent<PlayerMovement>().PlayerSpeed = 0f;
+        //player.GetComponent<PlayerMovement>().movement = Vector2.zero;
         transitStarted = true;
         yield return new WaitForSeconds(0.5f);
 
         // Cam switch target
+        camOverwrite = true;
         cameraFollow.target = transform;
+        cameraFollow.offset = new Vector3(0f, -0.4f, -10f);
+
         yield return new WaitForSeconds(0.7f);
 
         // Cam Zoom in on target
-        camZoomStart = true;
         lerpDir = 1;
+        camZoomStart = true;
+        focusObjectAnim.enabled = true;
         yield return new WaitForSeconds(2f);
 
         // Play target anim
         anim.enabled = true;
-        yield return new WaitForSeconds(0.2f);
-        // Camera pan
-        cameraFollow.target = camPanEndPos;
         yield return new WaitForSeconds(0.5f);
+        // Camera pan
+        
+        cameraFollow.target = camPanEndPos;
+        yield return new WaitForSeconds(0.4f);
+        camOverwrite = false;
+        player.GetComponent<PlayerMovement>().animControll = false;
+        focusObjectAnim.enabled = false;
+        player.GetComponent<PlayerMovement>().PlayerSpeed = playerSpeedDefault;
         transitAnimEnd = true;
     }
 }
