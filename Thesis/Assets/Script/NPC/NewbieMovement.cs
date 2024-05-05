@@ -62,7 +62,6 @@ public class NewbieMovement : MonoBehaviour
         }
         if(rb.velocity.magnitude > 0.01f || !moveToMonsterStart)
         {
-            Debug.Log(targetPos);
             agent.SetDestination(targetPos);
         }
         else if(moveToMonsterStart && rb.velocity.magnitude <= 0.01f)

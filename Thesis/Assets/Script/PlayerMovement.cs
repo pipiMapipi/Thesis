@@ -142,11 +142,6 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    private void Jump()
-    {
-        rb.AddForce(Vector2.right * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("jump");
-    }
 
     private void OnFire()
     {

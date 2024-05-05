@@ -43,7 +43,7 @@ public class FakeHeight : MonoBehaviour
 
     void Start()
     {
-        damageSprite = damageArea.GetComponent<SpriteRenderer>();
+        if (!transform.CompareTag("Player"))  damageSprite = damageArea.GetComponent<SpriteRenderer>();
         expansionStep = 0;
 
         
@@ -54,6 +54,8 @@ public class FakeHeight : MonoBehaviour
     {
         UpdatePosition();
         CheckGroundHit();
+
+        if (transform.CompareTag("Player")) return;
 
         if (hasLanded)
         {  
@@ -70,6 +72,11 @@ public class FakeHeight : MonoBehaviour
     {
         if (!isGrounded)
         {
+            if (transform.CompareTag("Player"))
+            {
+                GetComponent<Collider2D>().enabled = false;
+            }
+
             verticalVel += gravity * Time.deltaTime;
             transMain.position += new Vector3(0, verticalVel, 0) * Time.deltaTime;
         }
@@ -91,6 +98,15 @@ public class FakeHeight : MonoBehaviour
         {
             transMain.position = transObject.position;
             isGrounded = true;
+            if (transform.CompareTag("Player"))
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+                GetComponent<Collider2D>().enabled = true;
+                transMain.GetComponent<Animator>().SetBool("jumpNow", false);
+                transMain.GetComponent<Animator>().enabled = false;
+                transMain.GetComponent<SpriteRenderer>().sprite = null;
+                //this.enabled = false;
+            }
             GroundHit();
         }
     }
@@ -113,9 +129,10 @@ public class FakeHeight : MonoBehaviour
     public void SlowDown(float divisionFactor)
     {
         groundVel = groundVel / divisionFactor;
-        if(groundVel == Vector2.zero)
+        if(groundVel == Vector2.zero && verticalVel == 0)
         {
             hasLanded = true;
+            isGrounded = true;
         }
     }
 
