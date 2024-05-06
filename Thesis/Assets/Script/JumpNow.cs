@@ -40,11 +40,10 @@ public class JumpNow : MonoBehaviour
 
         
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpEnabled)
+        if (Input.GetKeyDown(KeyCode.J) && jumpEnabled)
         {
             jumpEnabled = false;
             initPos = transform.position;
-            Debug.Log(initPos.x + ";" + newPos.position.x);
             StartCoroutine(Jump());
         }
     }
