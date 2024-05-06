@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c27185160b70d9e40883cfa530aa995c
-      internalID: -282485521
+      spriteID: ae3123e548cdc124eb30da319bb3e2b1
+      internalID: 1502197993
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b01b2339e76d93642aa1c4303338e304
-      internalID: -814543712
+      spriteID: 1f90e03fcd9ebe14c92fd45049df62aa
+      internalID: -2117008087
       vertices: []
       indices: 
       edges: []
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6fbf1dffea24d64ba30df8cb2517a7f
-      internalID: 1822247815
+      spriteID: c49a919457d5e7647bf4bb03d28c03f9
+      internalID: 400943383
       vertices: []
       indices: 
       edges: []
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fb0c2b2118a4c148be7420650f7279b
-      internalID: 324945388
+      spriteID: 62fa1baac9091b245afe89005461d1e8
+      internalID: -1449624474
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatarAnim_walkleftt-Sheet_0: -282485521
-      avatarAnim_walkleftt-Sheet_1: -814543712
-      avatarAnim_walkleftt-Sheet_2: 1822247815
-      avatarAnim_walkleftt-Sheet_3: 324945388
+      avatarAnim_walkleftt-Sheet_0: 1502197993
+      avatarAnim_walkleftt-Sheet_1: -2117008087
+      avatarAnim_walkleftt-Sheet_2: 400943383
+      avatarAnim_walkleftt-Sheet_3: -1449624474
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

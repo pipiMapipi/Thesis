@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d1fbf32ab92f584c884c9d8b7422b7b
+guid: fafde45191a90fb44ada40bcf2bb07d3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_0
+      name: avatarAnim_hitleft-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 575e5e50d3696cf43aa1fb6b32316ca5
-      internalID: 820786384
+      spriteID: e82000cef1447ba46959bc2c73aab83d
+      internalID: 765958800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_1
+      name: avatarAnim_hitleft-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b454178341bf2d04683ec8ef04bd018b
-      internalID: 2094814725
+      spriteID: e4931670087915b4ba6a0366e4b9701e
+      internalID: 1408520863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_2
+      name: avatarAnim_hitleft-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 411c1ec6b3f4b50479469145798b3b87
-      internalID: -440194237
+      spriteID: ec941133a41d5fd4990663d82100f925
+      internalID: -1927697149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_3
+      name: avatarAnim_hitleft-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19c63794f2228c94c80e14f8dc54843e
-      internalID: -1558345277
+      spriteID: fbbdcdb6fc80a4247b4da35f7e3c82f0
+      internalID: -2011286440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_4
+      name: avatarAnim_hitleft-Sheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -221,92 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b691a55e4650dce4b91feddab6e0664e
-      internalID: 1147215983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12238a2e1cc4df24d882eafd7c9db08b
-      internalID: 1881870586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9e344eddd8cf0b439e0b113cf1f7083
-      internalID: 2039076701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c5b47d65d2ebc245afd4c7c91fc2d93
-      internalID: -1401490447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: avatarAnim_jumpleft-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b5cee62f0ac49f34e9c00345dd4e6287
-      internalID: -1059518060
+      spriteID: 608a232f939e5224abcce4cb2d4243b6
+      internalID: -1793944785
       vertices: []
       indices: 
       edges: []
@@ -322,15 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatarAnim_jumpleft-Sheet_0: 820786384
-      avatarAnim_jumpleft-Sheet_1: 2094814725
-      avatarAnim_jumpleft-Sheet_2: -440194237
-      avatarAnim_jumpleft-Sheet_3: -1558345277
-      avatarAnim_jumpleft-Sheet_4: 1147215983
-      avatarAnim_jumpleft-Sheet_5: 1881870586
-      avatarAnim_jumpleft-Sheet_6: 2039076701
-      avatarAnim_jumpleft-Sheet_7: -1401490447
-      avatarAnim_jumpleft-Sheet_8: -1059518060
+      avatarAnim_hitleft-Sheet_0: 765958800
+      avatarAnim_hitleft-Sheet_1: 1408520863
+      avatarAnim_hitleft-Sheet_2: -1927697149
+      avatarAnim_hitleft-Sheet_3: -2011286440
+      avatarAnim_hitleft-Sheet_4: -1793944785
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

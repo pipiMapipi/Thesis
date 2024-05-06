@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3df4e36357818b443bcb4ac447adce49
-      internalID: 444858145
+      spriteID: c2e0ceeee0de1d4498e93287d62cbc3e
+      internalID: -459935542
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 683ca520deaed7b428842b77bf072926
-      internalID: -261414022
+      spriteID: 955f4f9c9c518a94abd567ad5cda3729
+      internalID: -1355576725
       vertices: []
       indices: 
       edges: []
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15d722e3ce0fec3449fc03286ec69c3a
-      internalID: -1029972749
+      spriteID: 2165472f160ba5c489b68050de426d57
+      internalID: -1219003834
       vertices: []
       indices: 
       edges: []
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb4d6bcb22e172243a21dec8ecc5072e
-      internalID: -1181033688
+      spriteID: 98b970c3a49730643a2a4d7b7c026c50
+      internalID: -725351145
       vertices: []
       indices: 
       edges: []
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d9d81f66b5d98e41bafdb35738887d2
-      internalID: -84728133
+      spriteID: 0bb58a35165a60149831b7a9d2794f8a
+      internalID: -1998870423
       vertices: []
       indices: 
       edges: []
@@ -238,11 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      avatarAnim_idleleftt-Sheet_0: 444858145
-      avatarAnim_idleleftt-Sheet_1: -261414022
-      avatarAnim_idleleftt-Sheet_2: -1029972749
-      avatarAnim_idleleftt-Sheet_3: -1181033688
-      avatarAnim_idleleftt-Sheet_4: -84728133
+      avatarAnim_idleleftt-Sheet_0: -459935542
+      avatarAnim_idleleftt-Sheet_1: -1355576725
+      avatarAnim_idleleftt-Sheet_2: -1219003834
+      avatarAnim_idleleftt-Sheet_3: -725351145
+      avatarAnim_idleleftt-Sheet_4: -1998870423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
