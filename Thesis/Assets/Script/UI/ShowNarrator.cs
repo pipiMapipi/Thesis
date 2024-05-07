@@ -28,7 +28,7 @@ public class ShowNarrator : MonoBehaviour
     {
         if (player.position.x > initPosX)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 narratorActivated = true;
                 

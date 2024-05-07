@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool jumpEnabled;
-    public float jumpForce;
 
     [Header("Player Movement")]
     public float PlayerSpeed = 5f;
@@ -13,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 movement;
     public bool stopMovementInput;
     public Vector2 moveDir;
-
+    
 
     [Header("Dialogue")]
     [SerializeField] private DialogueUI dialogueUI;
@@ -21,10 +20,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Hit Box")]
     [SerializeField] private GameObject[] hitBoxes;
 
-    [Header("Newbie")]
-    [SerializeField] Newbie newbie;
-    [SerializeField] float speedOffset = -100f;
-    [SerializeField] float maxSpeedOffset = -1f;
 
     [Header("Anim Intervene")]
     public bool animControll;
@@ -115,18 +110,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            //if (newbie.isCarrying) {
-            //    rb.AddForce(moveDir * (PlayerSpeed + speedOffset) * Time.deltaTime);
-            //    if (rb.velocity.magnitude > maxSpeed)
-            //    {
-            //        float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed + maxSpeedOffset, idleFriction);
-            //        rb.velocity = rb.velocity.normalized * limitedSpeed;
-            //    }
-            //}
-            //else
-            //{
-
-            //}
             rb.AddForce(moveDir * PlayerSpeed * Time.deltaTime);
             if (rb.velocity.magnitude > maxSpeed)
             {

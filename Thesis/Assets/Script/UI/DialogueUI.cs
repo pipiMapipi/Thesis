@@ -33,7 +33,7 @@ public class DialogueUI : MonoBehaviour
             dialogueText.text = dialogue;
 
             yield return null;
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift));
         }
         CloseDialogueBox();
     }
@@ -46,7 +46,7 @@ public class DialogueUI : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 typeWriter.TextStop();
             }

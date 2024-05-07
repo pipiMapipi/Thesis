@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  knockbackForce: 5
+  knockbackForce: 10
   moveSpeed: 100
   layerMaskSlime:
     serializedVersion: 2

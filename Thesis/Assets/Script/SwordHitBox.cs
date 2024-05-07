@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordHitBox : MonoBehaviour
 {
@@ -52,8 +53,54 @@ public class SwordHitBox : MonoBehaviour
             }
             
         }
-        
-        
+
+        if (collision.CompareTag("Flower"))
+        {
+            // check if there is IDamageable in the script of the gameobject
+            IDamageable damageableObject = collision.GetComponent<IDamageable>();
+            if (damageableObject != null)
+            {
+                Animator flowerAnim = collision.transform.parent.GetChild(1).GetComponent<Animator>();
+                Image flowerHealthBar = collision.transform.parent.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>();
+ 
+                damageableObject.OnHit(swordDamage);
+
+
+                float flowerHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
+                float flowerMaxHealth = collision.transform.GetComponent<DamageableCharacter>().MaxHealth;
+
+                StartCoroutine(FlowerGetHit(flowerAnim, flowerHealthBar, flowerHealth, flowerMaxHealth));
+
+                if (flowerHealth == 0)
+                {
+                    GameObject flowerParent = collision.transform.parent.gameObject;
+                    StartCoroutine(DestoryFlower(flowerAnim, flowerParent));
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Collider does not implement IDmamageable");
+            }
+
+        }
+
+
+    }
+
+    private IEnumerator FlowerGetHit(Animator flower, Image healthBar, float health, float maxHealth)
+    {
+        healthBar.fillAmount = health / maxHealth;
+        flower.SetBool("GetHit", true);
+        yield return new WaitForSeconds(0.5f);
+        flower.SetBool("GetHit", false);
+    }
+
+    private IEnumerator DestoryFlower(Animator flower, GameObject flowerParent)
+    {
+        yield return new WaitForSeconds(0.4f);
+        flower.SetBool("FadeOut", true);
+        yield return new WaitForSeconds(2f);
+        Destroy(flowerParent);
     }
 }
 
