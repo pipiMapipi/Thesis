@@ -63,7 +63,7 @@ public class FakeHeight : MonoBehaviour
         }
         if (startExplosion)
         {
-            ExplosionAttack();
+            StartCoroutine(ExplosionAttack());
         }
         
     }
@@ -159,13 +159,14 @@ public class FakeHeight : MonoBehaviour
         
     }
 
-    private void ExplosionAttack()
+    private IEnumerator ExplosionAttack()
     {
         explosionStart += Time.deltaTime;
         
         if(explosionStart > explodeTime)
         {
             applyDamage = true;
+            yield return null;
             Destroy(gameObject);
         }
         else

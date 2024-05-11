@@ -8,6 +8,7 @@ public class SeedCollider : MonoBehaviour
     private Transform newbie;
 
     private List<Collider2D> enemyList = new List<Collider2D>();
+    private bool underAttack;
 
     void Start()
     {
@@ -18,12 +19,12 @@ public class SeedCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (fakeHeight.applyDamage) AttackEnemy();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if (collision.CompareTag("Monster") && !underAttack)
         {
             enemyList.Add(collision);
         }
@@ -31,7 +32,7 @@ public class SeedCollider : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if (collision.CompareTag("Monster") && !underAttack)
         {
             enemyList.Remove(collision);
         }
@@ -39,34 +40,29 @@ public class SeedCollider : MonoBehaviour
 
     private void AttackEnemy()
     {
-        Debug.Log(fakeHeight.applyDamage);
-        //foreach (enemy) in enemyList {
+        foreach (Collider2D enemy in enemyList) {
+            underAttack = true;
+            IDamageable damageableObject = enemy.GetComponent<IDamageable>();
+            if (damageableObject != null)
+            {
+                // Calculate direction between avatar and monsters
+                Vector3 parentPos = transform.parent.position;
+                Vector2 direction = (Vector2)(enemy.gameObject.transform.position - parentPos).normalized;
+                Vector2 knockback = direction * fakeHeight.knockbackForce;
 
-        //}
-        //if (collision.CompareTag("Monster") && fakeHeight.applyDamage)
-        //{
+                //collision.SendMessage("OnHit", swordDamage, knockback);
+                damageableObject.OnHit(fakeHeight.seedDamage, knockback);
 
-        //    IDamageable damageableObject = collision.GetComponent<IDamageable>();
-        //    if (damageableObject != null)
-        //    {
-        //        // Calculate direction between avatar and monsters
-        //        Vector3 parentPos = transform.parent.position;
-        //        Vector2 direction = (Vector2)(collision.gameObject.transform.position - parentPos).normalized;
-        //        Vector2 knockback = direction * fakeHeight.knockbackForce;
-
-        //        //collision.SendMessage("OnHit", swordDamage, knockback);
-        //        damageableObject.OnHit(fakeHeight.seedDamage, knockback);
-
-        //        float enemyHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
-        //        if (enemyHealth == 0)
-        //        {
-        //            newbie.GetComponent<DamageableCharacter>().Aggro += 1.5f;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("Collider does not implement IDmamageable");
-        //    }
-        //}
+                float enemyHealth = enemy.transform.GetComponent<DamageableCharacter>().Health;
+                if (enemyHealth == 0)
+                {
+                    newbie.GetComponent<DamageableCharacter>().Aggro += 1.5f;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Collider does not implement IDmamageable");
+            }
+        }
     }
 }

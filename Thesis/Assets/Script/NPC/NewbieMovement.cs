@@ -13,6 +13,9 @@ public class NewbieMovement : MonoBehaviour
     [Header("Raycast")]
     [SerializeField] private LayerMask layerMaskNewbie;
 
+    [Header("Panic")]
+    public bool stopMoving;
+
     //[Header("Enemies")]
     //public List<Collider2D> detectEnemies = new List<Collider2D>();
 
@@ -52,28 +55,39 @@ public class NewbieMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        stopMoving = true;
     }
 
     private void FixedUpdate()
     {
-        if (!moveToMonsterStart)
+        
+        if (!stopMoving)
         {
-            StartCoroutine(MoveToClosestMonster());
+            if (!moveToMonsterStart)
+            {
+                StartCoroutine(MoveToClosestMonster());
+            }
+            if ((rb.velocity.magnitude > 0.01f || !moveToMonsterStart))
+            {
+                agent.SetDestination(targetPos);
+            }
+            else if (moveToMonsterStart && rb.velocity.magnitude <= 0.01f)
+            {
+                moveToMonsterStart = false;
+
+                distMin = 3000f;
+            }
         }
-        if(rb.velocity.magnitude > 0.01f || !moveToMonsterStart)
+        else
         {
-            agent.SetDestination(targetPos);
+            StopCoroutine(MoveToClosestMonster());
         }
-        else if(moveToMonsterStart && rb.velocity.magnitude <= 0.01f)
-        {
-            moveToMonsterStart = false;
-            
-            distMin = 3000f;
-        }
+        
        
 
-        horizontal = Mathf.Clamp(rb.velocity.x, -1, 1);
-        vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
+        //horizontal = Mathf.Clamp(rb.velocity.x, -1, 1);
+        //vertical = Mathf.Clamp(rb.velocity.y, -1, 1);
         //animator.SetFloat("Horizontal", horizontal);
         //animator.SetFloat("Vertical", vertical);
 
@@ -134,7 +148,6 @@ public class NewbieMovement : MonoBehaviour
                 targetPos = (Vector2)enemy.transform.position;
             }
         }
-
 
         moveToMonsterStart = true;
         yield return new WaitForSeconds(2f);

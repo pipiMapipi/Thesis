@@ -23,9 +23,11 @@ public class ZoneAttack : MonoBehaviour
     private GameObject panicZoneAttack;
     private GameObject shutdownZoneAttack;
 
+    private TrapAttack trapAttack;
+
     private Collider2D zoneCollider;
 
-    
+    private NewbieMovement newbieMovement;
 
     private float CPborder = 0.5f;
     private float PSborder = 0.7f;
@@ -46,6 +48,9 @@ public class ZoneAttack : MonoBehaviour
         comfortZoneAttack.SetActive(false);
         panicZoneAttack.SetActive(false);
         shutdownZoneAttack.SetActive(false);
+
+        newbieMovement = GetComponent<NewbieMovement>();
+        trapAttack = panicZoneAttack.GetComponent<TrapAttack>();
     }
 
     // Update is called once per frame
@@ -89,21 +94,17 @@ public class ZoneAttack : MonoBehaviour
     {
         HP = currentHP / maxHP;
         // Shift to panic
-        if(CEDZ > CPborder * BEDZ * HP && CEDZ <= PSborder * BEDZ * HP)
+        if(CEDZ > CPborder * BEDZ * HP)
         {
+            newbieMovement.stopMoving = true;
             comfortZoneAttack.SetActive(false);
             panicZoneAttack.SetActive(true);
-            shutdownZoneAttack.SetActive(false);
-        }
-        // Shift to Shutdown
-        else if(CEDZ > PSborder * BEDZ * HP)
+            shutdownZoneAttack.SetActive(false);  
+        }// Shift to beam attack
+        else if (CEDZ <= CPborder * BEDZ * HP && !trapAttack.trapActive)
         {
-            comfortZoneAttack.SetActive(false);
-            panicZoneAttack.SetActive(false);
-            shutdownZoneAttack.SetActive(true);
-        }
-        else
-        {
+            newbieMovement.stopMoving = false;
+
             comfortZoneAttack.SetActive(true);
             panicZoneAttack.SetActive(false);
             shutdownZoneAttack.SetActive(false);

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f283e9ab34f55a54e816934068a1d563
+guid: c7ca43784643bc14ba8cd16ed9b858e5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,70 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: riverBank_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 223e155e597692b449d7853b50577113
-      internalID: -2025826162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: riverBank_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f99cc55180bdbba4a8232e1ac97ba844
-      internalID: 257950669
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: riverBank_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14689a44179b73841b177dd538a7cf13
-      internalID: 470007578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: riverBank_3
+      name: riverBank_extra_0
       rect:
         serializedVersion: 2
         x: 0
@@ -200,17 +137,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6305e4b5fc39cd49aa67473aa326348
-      internalID: 989244565
+      spriteID: 0606a2ef8c0df1b489827f2961a3e3ab
+      internalID: -1654625466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: riverBank_4
+      name: riverBank_extra_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 32
         width: 32
         height: 32
@@ -221,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77817269528d023448c384536ceb189d
-      internalID: 2093656812
+      spriteID: 0dda08731539b5a4ba3117f1b65715ea
+      internalID: -76455483
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: riverBank_5
+      name: riverBank_extra_2
       rect:
         serializedVersion: 2
         x: 0
@@ -242,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8be93319e3b51b4ca1422142b5997c4
-      internalID: 1827719381
+      spriteID: 87149101fd7a6b24cba577e6a44b7a61
+      internalID: -1709783503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: riverBank_6
+      name: riverBank_extra_3
       rect:
         serializedVersion: 2
         x: 32
@@ -263,29 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddfbfb2671b399048849366a26771ad3
-      internalID: -1306669148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: riverBank_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3dcec1470cf279943a3ba1982f72abdc
-      internalID: -221475974
+      spriteID: 026471e107a291e449da893cc319abfe
+      internalID: 812481800
       vertices: []
       indices: 
       edges: []
@@ -301,14 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      riverBank_0: -2025826162
-      riverBank_1: 257950669
-      riverBank_2: 470007578
-      riverBank_3: 989244565
-      riverBank_4: 2093656812
-      riverBank_5: 1827719381
-      riverBank_6: -1306669148
-      riverBank_7: -221475974
+      riverBank_extra_0: -1654625466
+      riverBank_extra_1: -76455483
+      riverBank_extra_2: -1709783503
+      riverBank_extra_3: 812481800
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

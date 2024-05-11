@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TrapAttack : MonoBehaviour
 {
+    public bool trapActive;
+
     [SerializeField] private GameObject seedAttack;
     [SerializeField] private Vector2 groundDispenseVel;
     [SerializeField] private Vector2 verticalDispenseVel;
@@ -14,7 +16,7 @@ public class TrapAttack : MonoBehaviour
 
     private Quaternion rotation;
 
-    private int seedCount = 5;
+    private int seedCount = 4;
     private List<Vector2> seedPositionList = new List<Vector2>();
     private bool hasResetList;
     private bool hasInitAttack;
@@ -67,6 +69,7 @@ public class TrapAttack : MonoBehaviour
 
     private IEnumerator InitSeedAttack()
     {
+        trapActive = true;
         hasInitAttack = true;
         if (!hasResetList)
         {
@@ -82,8 +85,8 @@ public class TrapAttack : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(10f);
-
+        yield return new WaitForSeconds(14f);
+        trapActive = false;
         hasResetList = false;
         hasInitAttack = false;
     }

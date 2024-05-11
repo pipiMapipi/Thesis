@@ -6,10 +6,13 @@ public class CommunictionIconTrigger : MonoBehaviour
 {
     private Transform player;
     private bool dropSignEnabled;
+    private Transform piggle;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         dropSignEnabled = true;
+
+        piggle = GameObject.FindGameObjectWithTag("Newbie").transform;
     }
 
     // Update is called once per frame

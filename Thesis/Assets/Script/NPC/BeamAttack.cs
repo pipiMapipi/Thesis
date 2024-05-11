@@ -121,16 +121,16 @@ public class BeamAttack : MonoBehaviour
             {
                 if (damageable != null)
                 {
-                    //Vector2 direct = (Vector2)(hit.collider.gameObject.transform.position - transform.position).normalized;
-                    //Vector2 knockback = direct * knockbackForce;
+                    Vector2 direct = (Vector2)(hit.collider.gameObject.transform.position - transform.position).normalized;
+                    Vector2 knockback = direct * knockbackForce;
 
-                    
+
 
                     attackIntervalTime += Time.deltaTime;
                     //collision.SendMessage("OnHit", swordDamage, knockback);
                     if(attackIntervalTime > attackInterval)
                     {
-                        damageable.OnHit(damage);
+                        damageable.OnHit(damage, knockback);
                         attackIntervalTime = 0;
                     }
 
