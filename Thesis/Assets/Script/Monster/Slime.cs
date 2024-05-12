@@ -19,7 +19,7 @@ public class Slime : MonoBehaviour
     [SerializeField] private float maxDist;
 
     public string lastHitObject;
-
+    public float speedNow;
 
     private Transform[] targets = new Transform[2];
     private NavMeshAgent agent;
@@ -67,7 +67,12 @@ public class Slime : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(lastHitObject == "")
+        if (GetComponent<DamageableCharacter>().Health <= 0)
+        {
+            agent.SetDestination(transform.position);
+        }
+
+        if (lastHitObject == "")
         {
             CheckAggro();
         }
@@ -94,14 +99,14 @@ public class Slime : MonoBehaviour
                 {
                     Collider2D detectedObject = detectionZone.detectObjects[i];
 
-                    if (detectedObject != null && hasLineOfSight)
+                    if (detectedObject != null && hasLineOfSight && GetComponent<DamageableCharacter>().Health > 0)
                     {
                         //direction = (detectedObject.transform.position - transform.position).normalized;
                         //rb.AddForce(direction * moveSpeed * Time.deltaTime);
 
                         agent.SetDestination(target.position);
                         playerDetected = true;
-                    }
+                    } 
                 }
 
                 
@@ -126,7 +131,7 @@ public class Slime : MonoBehaviour
         animator.SetFloat("Vertical", vertical);
 
         animator.SetFloat("Speed", rb.velocity.magnitude);
-
+        speedNow = rb.velocity.magnitude;
         // Line of sight
         RaycastHit2D ray = Physics2D.Raycast(transform.position, (Vector2)(GameObject.FindGameObjectWithTag(tag).transform.position - transform.position).normalized, (GameObject.FindGameObjectWithTag(tag).transform.position - transform.position).magnitude, layerMaskSlime);
         if(ray.collider != null)

@@ -136,13 +136,13 @@ public class NewbieMovement : MonoBehaviour
 
         
         float dist;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         detectEnemies = GameObject.FindGameObjectsWithTag("Monster");
         foreach (GameObject enemy in detectEnemies)
         {
             dist = Vector2.Distance((Vector2)transform.position, (Vector2)enemy.transform.position);
-            if(dist < distMin)
+            if(dist < distMin && enemy.GetComponent<Collider2D>() != null)
             {
                 distMin = dist;
                 target = enemy.transform;
