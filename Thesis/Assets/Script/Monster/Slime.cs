@@ -18,6 +18,8 @@ public class Slime : MonoBehaviour
     [SerializeField] private float moveRange;
     [SerializeField] private float maxDist;
 
+    public string lastHitObject;
+
 
     private Transform[] targets = new Transform[2];
     private NavMeshAgent agent;
@@ -65,7 +67,24 @@ public class Slime : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckAggro();
+        if(lastHitObject == "")
+        {
+            CheckAggro();
+        }
+        else
+        {
+            if (lastHitObject == "Player")
+            {
+                target = targets[0];
+                tag = "Player";
+            }
+            else
+            {
+                target = targets[1];
+                tag = "Newbie";
+            }
+        }
+        
 
         if (detectionZone.detectObjects.Count > 0)
         {

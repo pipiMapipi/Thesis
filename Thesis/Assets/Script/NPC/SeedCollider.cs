@@ -43,6 +43,7 @@ public class SeedCollider : MonoBehaviour
         foreach (Collider2D enemy in enemyList) {
             underAttack = true;
             IDamageable damageableObject = enemy.GetComponent<IDamageable>();
+            Slime slime = enemy.GetComponent<Slime>();
             if (damageableObject != null)
             {
                 // Calculate direction between avatar and monsters
@@ -52,11 +53,12 @@ public class SeedCollider : MonoBehaviour
 
                 //collision.SendMessage("OnHit", swordDamage, knockback);
                 damageableObject.OnHit(fakeHeight.seedDamage, knockback);
+                slime.lastHitObject = "Newbie";
 
                 float enemyHealth = enemy.transform.GetComponent<DamageableCharacter>().Health;
                 if (enemyHealth == 0)
                 {
-                    newbie.GetComponent<DamageableCharacter>().Aggro += 1.5f;
+                    newbie.GetComponent<DamageableCharacter>().Aggro += 1f;
                 }
             }
             else

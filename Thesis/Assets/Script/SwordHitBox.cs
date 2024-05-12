@@ -35,6 +35,7 @@ public class SwordHitBox : MonoBehaviour
         {
             // check if there is IDamageable in the script of the gameobject
             IDamageable damageableObject = collision.GetComponent<IDamageable>();
+            Slime slime = collision.GetComponent<Slime>();
             if (damageableObject != null)
             {
                 // Calculate direction between avatar and monsters
@@ -44,11 +45,12 @@ public class SwordHitBox : MonoBehaviour
 
                 //collision.SendMessage("OnHit", swordDamage, knockback);
                 damageableObject.OnHit(knockback);
+                slime.lastHitObject = "Player";
 
                 float enemyHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
                 if(enemyHealth == 0)
                 {
-                    player.GetComponent<DamageableCharacter>().Aggro += 0.5f;
+                    player.GetComponent<DamageableCharacter>().Aggro += 1f;
                 }
             }
             else

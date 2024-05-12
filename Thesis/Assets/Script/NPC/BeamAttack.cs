@@ -121,10 +121,10 @@ public class BeamAttack : MonoBehaviour
             {
                 if (damageable != null)
                 {
+                    Slime slime = hit.collider.GetComponent<Slime>();
+
                     Vector2 direct = (Vector2)(hit.collider.gameObject.transform.position - transform.position).normalized;
                     Vector2 knockback = direct * knockbackForce;
-
-
 
                     attackIntervalTime += Time.deltaTime;
                     //collision.SendMessage("OnHit", swordDamage, knockback);
@@ -132,6 +132,7 @@ public class BeamAttack : MonoBehaviour
                     {
                         damageable.OnHit(damage, knockback);
                         attackIntervalTime = 0;
+                        slime.lastHitObject = "Newbie";
                     }
 
 
