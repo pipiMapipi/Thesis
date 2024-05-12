@@ -296,6 +296,8 @@ MonoBehaviour:
     m_Bits: 179
   moveRange: 0.2
   maxDist: 1.5
+  lastHitObject: 
+  speedNow: 0
 --- !u!195 &1556058245251129560
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class Slime : MonoBehaviour
     [SerializeField] private float moveRange;
     [SerializeField] private float maxDist;
 
+    [Header("Potion")]
+    public float potionProb;
+
     public string lastHitObject;
     public float speedNow;
 
@@ -45,6 +48,7 @@ public class Slime : MonoBehaviour
     private GameObject player;
     private GameObject newbie;
 
+    
     private void Awake()
     {
         detectionZone = transform.GetChild(0).GetComponent<DetectionZone>();
@@ -63,6 +67,8 @@ public class Slime : MonoBehaviour
 
         targets[0] = player.transform;
         targets[1] = newbie.transform;
+
+        potionProb = Random.Range(0f, 1f);
     }
 
     private void FixedUpdate()
