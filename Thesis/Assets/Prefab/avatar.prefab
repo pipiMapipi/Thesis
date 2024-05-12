@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 1
-  knockbackForce: 3
+  knockbackForce: 10
 --- !u!1 &2070566397407015972
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 1
-  knockbackForce: 3
+  knockbackForce: 10
 --- !u!1 &3556342252983008944
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1557703565215114392
 Transform:
   m_ObjectHideFlags: 0
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 1
-  knockbackForce: 3
+  knockbackForce: 10
 --- !u!1 &4392903767553123856
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +885,7 @@ MonoBehaviour:
   explodeTime: 0
   trapAnim: {fileID: 0}
   seedDamage: 0
-  knockbackForce: 20
+  knockbackForce: 30
   applyDamage: 0
 --- !u!114 &9142917735024969943
 MonoBehaviour:
@@ -1056,7 +1056,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpEnabled: 0
-  jumpForce: 0
   PlayerSpeed: 500
   maxSpeed: 5
   movement: {x: 0, y: 0}
@@ -1068,9 +1067,6 @@ MonoBehaviour:
   - {fileID: 3284450192740956708}
   - {fileID: 4150835008388988461}
   - {fileID: 907593501222342021}
-  newbie: {fileID: 0}
-  speedOffset: -410
-  maxSpeedOffset: -1
   animControll: 0
 --- !u!114 &4669523949694272084
 MonoBehaviour:
@@ -1205,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 1
-  knockbackForce: 3
+  knockbackForce: 10
 --- !u!1 &7463447297724990034
 GameObject:
   m_ObjectHideFlags: 0

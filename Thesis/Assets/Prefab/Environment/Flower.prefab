@@ -62,7 +62,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 70
   m_TargetDisplay: 0
 --- !u!114 &3542180204087568406
 MonoBehaviour:
@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 4328302800363473828}
   - component: {fileID: 4423675295810241941}
   - component: {fileID: 4978607779694067976}
-  - component: {fileID: 4988205935761789825}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Flower
@@ -300,24 +299,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.54, y: 2.55}
+  m_Size: {x: 1.84, y: 3.56}
   m_Direction: 0
---- !u!114 &4988205935761789825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6080144114841897133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &8184306907738691886
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +526,7 @@ GameObject:
   - component: {fileID: 679380372461472484}
   - component: {fileID: 6328212223013422222}
   - component: {fileID: 8407975566911599136}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,4 +596,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.64
+  m_Radius: 2.34

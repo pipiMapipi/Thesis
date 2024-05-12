@@ -18,7 +18,7 @@ public interface IDamageable
     public void OnHit(float Damage, Vector2 knockback);
     public void OnHit(float Damage);
 
-
+    public void OnHit(Vector2 knockback);
     public void Destroyself();
 
 }

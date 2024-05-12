@@ -176,6 +176,21 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         
     }
 
+    public void OnHit(Vector2 knockback)
+    {
+        if (!Invincible)
+        {
+            animator.SetTrigger("Shield");
+
+            rb.AddForce(knockback, ForceMode2D.Impulse);
+
+            if (invincibilityEnabled)
+            {
+                Invincible = true;
+            }
+        }
+    }
+
     public void Destroyself()
     {
         Destroy(gameObject);

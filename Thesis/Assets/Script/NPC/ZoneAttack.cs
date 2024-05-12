@@ -7,10 +7,11 @@ public class ZoneAttack : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private Transform firePoint;
 
-    [Header("Zone")]
-    [SerializeField] private bool enterComfortZone;
-    [SerializeField] private bool enterPanicZone;
-    [SerializeField] private bool enterShutdownZone;
+    //[Header("Zone")]
+    //[SerializeField] private bool enterComfortZone;
+    //[SerializeField] private bool enterPanicZone;
+    //[SerializeField] private bool enterShutdownZone;
+
     public List<Collider2D> enemyList = new List<Collider2D>();
 
     [Header("Zone Chnage")]
@@ -33,11 +34,13 @@ public class ZoneAttack : MonoBehaviour
     private float PSborder = 0.7f;
     private float HP;
 
+    private PiggleCommunica piggleCommunica;
+
     void Start()
     {
-        enterComfortZone = false;
-        enterPanicZone = false;
-        enterShutdownZone = false;
+        //enterComfortZone = false;
+        //enterPanicZone = false;
+        //enterShutdownZone = false;
 
         comfortZoneAttack = transform.GetChild(0).gameObject;
         panicZoneAttack = transform.GetChild(1).gameObject;
@@ -51,6 +54,9 @@ public class ZoneAttack : MonoBehaviour
 
         newbieMovement = GetComponent<NewbieMovement>();
         trapAttack = panicZoneAttack.GetComponent<TrapAttack>();
+
+        piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+        piggleCommunica.needRescue = false;
     }
 
     // Update is called once per frame
@@ -97,17 +103,24 @@ public class ZoneAttack : MonoBehaviour
         if(CEDZ > CPborder * BEDZ * HP)
         {
             newbieMovement.stopMoving = true;
+            piggleCommunica.needRescue = true;
+
             comfortZoneAttack.SetActive(false);
             panicZoneAttack.SetActive(true);
-            shutdownZoneAttack.SetActive(false);  
+
+            
         }// Shift to beam attack
         else if (CEDZ <= CPborder * BEDZ * HP && !trapAttack.trapActive)
         {
             newbieMovement.stopMoving = false;
+            piggleCommunica.taskSolved = true;
+            piggleCommunica.needRescue = false;
+            
 
             comfortZoneAttack.SetActive(true);
             panicZoneAttack.SetActive(false);
-            shutdownZoneAttack.SetActive(false);
+
+            
         }
     }
 

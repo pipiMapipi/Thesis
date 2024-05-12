@@ -11,11 +11,15 @@ public class SwordHitBox : MonoBehaviour
 
     private Collider2D swordCollider;
     private Transform player;
+
+    private PiggleCommunica piggleCommunica;
    
     void Start()
     {
         swordCollider = gameObject.GetComponent<Collider2D>();
         player = transform.parent.transform;
+
+        piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
     }
 
     // Update is called once per frame
@@ -39,7 +43,7 @@ public class SwordHitBox : MonoBehaviour
                 Vector2 knockback = direction * knockbackForce;
 
                 //collision.SendMessage("OnHit", swordDamage, knockback);
-                damageableObject.OnHit(swordDamage, knockback);
+                damageableObject.OnHit(knockback);
 
                 float enemyHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
                 if(enemyHealth == 0)
@@ -75,6 +79,7 @@ public class SwordHitBox : MonoBehaviour
                 {
                     GameObject flowerParent = collision.transform.parent.gameObject;
                     StartCoroutine(DestoryFlower(flowerAnim, flowerParent));
+                    
                 }
             }
             else
@@ -97,9 +102,10 @@ public class SwordHitBox : MonoBehaviour
 
     private IEnumerator DestoryFlower(Animator flower, GameObject flowerParent)
     {
-        yield return new WaitForSeconds(0.4f);
         flower.SetBool("FadeOut", true);
-        yield return new WaitForSeconds(2f);
+        piggleCommunica.taskSolved = true;
+        piggleCommunica.needClearFlower = false;
+        yield return new WaitForSeconds(2f);      
         Destroy(flowerParent);
     }
 }

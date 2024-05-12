@@ -5,14 +5,6 @@ using UnityEngine.AI;
 
 public class NewbieMovement : MonoBehaviour
 {
-    [Header("Attack")]
-    [SerializeField] private float damage = 1f;
-    [SerializeField] private float knockbackForce = 5f;
-    [SerializeField] private float moveSpeed = 200f;
-
-    [Header("Raycast")]
-    [SerializeField] private LayerMask layerMaskNewbie;
-
     [Header("Panic")]
     public bool stopMoving;
 
@@ -40,7 +32,7 @@ public class NewbieMovement : MonoBehaviour
 
     private bool moveToMonsterStart;
     private float distMin;
-    private Vector2 targetPos;
+    private Transform target;
     private GameObject[] detectEnemies;
 
 
@@ -57,20 +49,27 @@ public class NewbieMovement : MonoBehaviour
         agent.updateUpAxis = false;
 
         stopMoving = true;
+        target = transform;
     }
 
     private void FixedUpdate()
     {
+        if(target == null)
+        {
+            distMin = 3000f;
+            target = transform;
+        }
         
         if (!stopMoving)
         {
+            agent.isStopped = false;
             if (!moveToMonsterStart)
             {
-                StartCoroutine(MoveToClosestMonster());
+                StartCoroutine("MoveToClosestMonster");
             }
             if ((rb.velocity.magnitude > 0.01f || !moveToMonsterStart))
             {
-                agent.SetDestination(targetPos);
+                agent.SetDestination(target.position);
             }
             else if (moveToMonsterStart && rb.velocity.magnitude <= 0.01f)
             {
@@ -81,7 +80,8 @@ public class NewbieMovement : MonoBehaviour
         }
         else
         {
-            StopCoroutine(MoveToClosestMonster());
+            agent.isStopped = true;
+            //StopCoroutine("MoveToClosestMonster");
         }
         
        
@@ -98,27 +98,27 @@ public class NewbieMovement : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        IDamageable damageable = collision.collider.GetComponent<IDamageable>();
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
-        if (collision.collider.CompareTag("Monster"))
-        {
-            if (damageable != null)
-            {
-                Vector2 direction = (Vector2)(collision.gameObject.transform.position - transform.position).normalized;
-                Vector2 knockback = direction * knockbackForce;
+    //    if (collision.collider.CompareTag("Monster"))
+    //    {
+    //        if (damageable != null)
+    //        {
+    //            Vector2 direction = (Vector2)(collision.gameObject.transform.position - transform.position).normalized;
+    //            Vector2 knockback = direction * knockbackForce;
 
-                //collision.SendMessage("OnHit", swordDamage, knockback);
-                damageable.OnHit(damage, knockback);
-            }
-            else
-            {
-                Debug.LogWarning("Collider does not implement IDmamageable");
-            }
+    //            //collision.SendMessage("OnHit", swordDamage, knockback);
+    //            damageable.OnHit(damage, knockback);
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning("Collider does not implement IDmamageable");
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
 
     private IEnumerator MoveToWayPoint()
@@ -135,8 +135,7 @@ public class NewbieMovement : MonoBehaviour
     {
 
         
-        float dist;      
-
+        float dist;
         yield return new WaitForSeconds(2f);
 
         detectEnemies = GameObject.FindGameObjectsWithTag("Monster");
@@ -145,7 +144,8 @@ public class NewbieMovement : MonoBehaviour
             dist = Vector2.Distance((Vector2)transform.position, (Vector2)enemy.transform.position);
             if(dist < distMin)
             {
-                targetPos = (Vector2)enemy.transform.position;
+                distMin = dist;
+                target = enemy.transform;
             }
         }
 
