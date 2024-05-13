@@ -51,7 +51,6 @@ public class HealthPotionTrigger : MonoBehaviour
                     anim.enabled = true;
                 }
             }
-            Debug.Log(entity.transform.position);
             potion.transform.position = (Vector2) entity.transform.position + posOffset;
         }
 
@@ -96,6 +95,11 @@ public class HealthPotionTrigger : MonoBehaviour
         else
         {
             target.GetComponent<DamageableCharacter>().Health += healthAmount;
+        }
+
+        if(target.GetComponent<DamageableCharacter>().cureAnim != null && entity == null)
+        {
+            target.GetComponent<DamageableCharacter>().cureAnim.SetActive(true);
         }
 
         Destroy(this);

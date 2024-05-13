@@ -7,6 +7,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     [Header("Health")]
     [SerializeField] private float _health = 300f;
     [SerializeField] private float _maxHealth = 300f;
+    public GameObject cureAnim;
 
     [Header("Targetable")]
     [SerializeField] private bool _targetable = true;
@@ -131,6 +132,8 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         colliderPhysics = GetComponent<Collider2D>();
 
         MaxHealth = Health;
+
+        if (cureAnim != null) cureAnim.SetActive(false);
     }
 
     private void FixedUpdate()
