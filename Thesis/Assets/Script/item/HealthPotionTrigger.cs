@@ -10,7 +10,7 @@ public class HealthPotionTrigger : MonoBehaviour
     [SerializeField] private bool randomDrop;
 
     private Slime slime;
-    private float triggerAmount = 0.4f;
+    private float triggerAmount = 0.6f;
     [SerializeField] private bool canDrop;
     private Vector3 velocity = Vector3.zero;
     private float smoothTime = 0.25f;
@@ -49,6 +49,10 @@ public class HealthPotionTrigger : MonoBehaviour
                 if ((!randomDrop || (randomDrop && canDrop)))
                 {
                     anim.enabled = true;
+                    if (target.GetComponent<DamageableCharacter>().cureAnim.activeSelf)
+                    {
+                        target.GetComponent<DamageableCharacter>().cureAnim.SetActive(false);
+                    }
                 }
             }
             potion.transform.position = (Vector2) entity.transform.position + posOffset;

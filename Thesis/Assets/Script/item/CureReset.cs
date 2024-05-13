@@ -21,7 +21,6 @@ public class CureReset : MonoBehaviour
     {
         startDeactive = true;
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("here");
         this.gameObject.SetActive(false);
     }
 }
