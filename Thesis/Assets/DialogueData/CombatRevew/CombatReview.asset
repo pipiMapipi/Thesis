@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
+  m_Name: CombatReview
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Phew, that was tough!
+  - Is there anything that you would want me to know?
+  questions:
+  - questionText: Communication
+    dialogueObject: {fileID: 11400000, guid: 94ac2a72ee8384a408ae03975ba7dabb, type: 2}
+  - questionText: River
+    dialogueObject: {fileID: 11400000, guid: 67e60c930b9b79149aae57a4fd6da3c1, type: 2}
+  - questionText: ...
+    dialogueObject: {fileID: 11400000, guid: e625118d56bd0ea41bf65c11d6fa5dc3, type: 2}

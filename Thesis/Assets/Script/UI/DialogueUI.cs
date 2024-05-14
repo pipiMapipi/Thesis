@@ -7,10 +7,13 @@ public class DialogueUI : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text dialogueText;
-    
+
+    [SerializeField] private QuestionHandler questionHandler;
+
     public bool IsOpen { get; private set; } // only this script can set whether it's open
 
     private TypeWriter typeWriter;
+    
     void Start()
     {
         typeWriter = GetComponent<TypeWriter>();
@@ -29,13 +32,29 @@ public class DialogueUI : MonoBehaviour
 
         foreach (string dialogue in dialogueObject.Dialogue)
         {
+            
+        }
+        for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
+        {
+            string dialogue = dialogueObject.Dialogue[i];
             yield return RunTypingEffect(dialogue);
             dialogueText.text = dialogue;
+
+            if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.HasQuestions) break;
 
             yield return null;
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift));
         }
-        CloseDialogueBox();
+
+        if (dialogueObject.HasQuestions)
+        {
+            questionHandler.ShowQuestions(dialogueObject.Questions);
+        }
+        else
+        {
+            CloseDialogueBox();
+        }
+        
     }
 
     private IEnumerator RunTypingEffect(string dialogue)

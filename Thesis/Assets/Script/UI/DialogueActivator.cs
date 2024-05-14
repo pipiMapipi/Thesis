@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DialogueActivator : MonoBehaviour, PlayerInteractable
 {
-    [SerializeField] private DialogueObject dialogueObject;
+    [SerializeField] private List<DialogueObject> dialogueObject = new List<DialogueObject>();
+    public int dialogueIndex;
     public void Interact(PlayerMovement player)
     {
-        player.DialogueUI.ShowDialogue(dialogueObject);
+        player.DialogueUI.ShowDialogue(dialogueObject[dialogueIndex]);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
