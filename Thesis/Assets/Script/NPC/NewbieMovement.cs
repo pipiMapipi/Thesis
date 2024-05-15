@@ -8,6 +8,11 @@ public class NewbieMovement : MonoBehaviour
     [Header("Panic")]
     public bool stopMoving;
 
+    [Header("Avatar")]
+    [SerializeField] private bool dialogueScene;
+
+    private bool avatarFollow;
+
     //[Header("Enemies")]
     //public List<Collider2D> detectEnemies = new List<Collider2D>();
 
@@ -35,7 +40,8 @@ public class NewbieMovement : MonoBehaviour
     private Transform target;
     private GameObject[] detectEnemies;
 
-
+    private DialogueActivator dialogueActivator;
+    private Transform player;
     private void Awake()
     {
         detectionZone = transform.GetChild(0).GetComponent<DetectionZone>();
@@ -43,6 +49,7 @@ public class NewbieMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         initPos = transform.position;
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -50,6 +57,16 @@ public class NewbieMovement : MonoBehaviour
 
         stopMoving = true;
         target = transform;
+
+        dialogueActivator = GetComponent<DialogueActivator>();
+        if (!dialogueScene)
+        {
+            dialogueActivator.enabled = false;
+        }
+        else
+        {
+            dialogueActivator.enabled = true;
+        }
     }
 
     private void FixedUpdate()
@@ -63,19 +80,28 @@ public class NewbieMovement : MonoBehaviour
         if (!stopMoving)
         {
             agent.isStopped = false;
-            if (!moveToMonsterStart)
-            {
-                StartCoroutine("MoveToClosestMonster");
-            }
-            if ((rb.velocity.magnitude > 0.01f || !moveToMonsterStart))
-            {
-                agent.SetDestination(target.position);
-            }
-            else if (moveToMonsterStart && rb.velocity.magnitude <= 0.01f)
-            {
-                moveToMonsterStart = false;
+            
 
-                distMin = 3000f;
+            if (dialogueScene)
+            {
+                agent.SetDestination(player.position);
+            }
+            else
+            {
+                if (!moveToMonsterStart)
+                {
+                    StartCoroutine("MoveToClosestMonster");
+                }
+                if ((rb.velocity.magnitude > 0.01f || !moveToMonsterStart))
+                {
+                    agent.SetDestination(target.position);
+                }
+                else if (moveToMonsterStart && rb.velocity.magnitude <= 0.01f)
+                {
+                    moveToMonsterStart = false;
+
+                    distMin = 3000f;
+                }
             }
         }
         else

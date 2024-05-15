@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
+    [Header("Player")]
     [SerializeField] private Image healthBar;
     [SerializeField] private Sprite[] lifeIcon;
     [SerializeField] private GameObject maxLife;
+
+    [Header("Piggle")]
+    [SerializeField] private Image healthBarPiggle;
 
     private DamageableCharacter playerHealth;
     private float oneLifeHealth;
@@ -15,11 +19,15 @@ public class HealthUI : MonoBehaviour
     private int lifeCount;
     private bool lifeChange;
     private float preHealth;
+
+    private DamageableCharacter piggleHealth;
     void Awake()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<DamageableCharacter>();
         lifeCount = maxLife.transform.childCount;
         preHealth = playerHealth.Health;
+
+        piggleHealth = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DamageableCharacter>();
     }
 
     // Update is called once per frame
@@ -41,6 +49,8 @@ public class HealthUI : MonoBehaviour
         }
 
         preHealth = playerHealth.Health;
+
+        healthBarPiggle.fillAmount = piggleHealth.Health / piggleHealth.MaxHealth;
     }
 
     private IEnumerator healthUI()

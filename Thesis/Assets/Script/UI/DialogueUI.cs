@@ -10,6 +10,8 @@ public class DialogueUI : MonoBehaviour
 
     [SerializeField] private QuestionHandler questionHandler;
 
+    [SerializeField] private Animator instructAnim;
+
     public bool IsOpen { get; private set; } // only this script can set whether it's open
 
     private TypeWriter typeWriter;
@@ -23,6 +25,7 @@ public class DialogueUI : MonoBehaviour
     public void ShowDialogue(DialogueObject dialogueObject)
     {
         IsOpen = true;
+        instructAnim.SetTrigger("Talk");
         dialogueBox.SetActive(true);
         StartCoroutine(StepThroughDialogue(dialogueObject));
     }
@@ -30,10 +33,6 @@ public class DialogueUI : MonoBehaviour
     private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
     {
 
-        foreach (string dialogue in dialogueObject.Dialogue)
-        {
-            
-        }
         for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
         {
             string dialogue = dialogueObject.Dialogue[i];

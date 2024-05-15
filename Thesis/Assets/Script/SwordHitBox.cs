@@ -20,7 +20,7 @@ public class SwordHitBox : MonoBehaviour
         swordCollider = gameObject.GetComponent<Collider2D>();
         player = transform.parent.transform;
 
-        if (SceneManager.GetActiveScene().name == "Combat")  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+        if (SceneManager.GetActiveScene().name == "combat")  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
     }
 
     // Update is called once per frame

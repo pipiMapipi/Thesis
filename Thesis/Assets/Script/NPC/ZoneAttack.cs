@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ZoneAttack : MonoBehaviour
 {
-    [Header("Attack")]
-    [SerializeField] private Transform firePoint;
 
     //[Header("Zone")]
     //[SerializeField] private bool enterComfortZone;
@@ -55,15 +54,22 @@ public class ZoneAttack : MonoBehaviour
         newbieMovement = GetComponent<NewbieMovement>();
         trapAttack = panicZoneAttack.GetComponent<TrapAttack>();
 
-        piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
-        piggleCommunica.needRescue = false;
+        if (SceneManager.GetActiveScene().name == "combat")
+        {
+            piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+            piggleCommunica.needRescue = false;
+        }            
     }
 
     // Update is called once per frame
     void Update()
     {
-        ZoneShift();
-        DetectEnemyDensity();
+        if (SceneManager.GetActiveScene().name == "combat")
+        {
+            ZoneShift();
+            DetectEnemyDensity();
+        }
+            
 
         // Debug
         //if (enterComfortZone && !enterPanicZone && !enterShutdownZone)
