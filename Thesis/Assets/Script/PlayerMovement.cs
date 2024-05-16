@@ -41,8 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Collider2D[] swordCollider = new Collider2D[4];
 
-    
-    
+    private float attackInterval = 1.2f;
+    private bool attackEnabled = true;
+    private float attackTimeElapsed;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
             swordCollider[i] = hitBoxes[i].GetComponent<Collider2D>();
         }
 
-        
     }
 
     // Update is called once per frame
@@ -104,6 +106,15 @@ public class PlayerMovement : MonoBehaviour
                 Interactable.Interact(this);
             }
         }
+
+        if (!attackEnabled)
+        {
+            attackTimeElapsed += Time.deltaTime;
+            if (attackTimeElapsed > attackInterval)
+            {
+                attackEnabled = true;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -128,7 +139,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFire()
     {
-        animator.SetTrigger("swordAttack");
+        if (attackEnabled)
+        {
+            animator.SetTrigger("swordAttack");
+            attackEnabled = false;
+            attackTimeElapsed = 0f;
+        }
+
     }
 
     private void LockMovement()

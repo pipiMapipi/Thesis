@@ -9,6 +9,8 @@ public class PiggleCommunica : MonoBehaviour
     public bool needRescue;
     public bool taskSolved;
 
+    [SerializeField] private Transform emotion;
+
     private float offset = 1f;
 
     private Transform piggle;
@@ -30,18 +32,21 @@ public class PiggleCommunica : MonoBehaviour
                 dropSignEnabled = false;
                 taskSolved = false;
                 DropASign(0, flowerPos);
+                emotion.GetChild(0).gameObject.SetActive(true);
             }
             if (needRescue)
             {
                 dropSignEnabled = false;
                 taskSolved = false;
                 DropASign(1, (Vector2) piggle.position + new Vector2(0, offset));
+                emotion.GetChild(0).gameObject.SetActive(true);
             }
         }
         if(taskSolved)
         {
             if (!needClearFlower) StartCoroutine(DeleteSign(0));
             if (!needRescue) StartCoroutine(DeleteSign(1));
+            emotion.GetChild(0).gameObject.SetActive(false);
         }
 
 

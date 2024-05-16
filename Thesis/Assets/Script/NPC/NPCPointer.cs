@@ -7,6 +7,7 @@ public class NPCPointer : MonoBehaviour
     [Header("Image Counter Rotate")]
     [SerializeField] private RectTransform healthTransform;
     [SerializeField] private RectTransform avatarTransform;
+    [SerializeField] private RectTransform emotionTransform;
 
     [SerializeField] private Camera UICam;
 
@@ -35,6 +36,7 @@ public class NPCPointer : MonoBehaviour
         // Counter Rotate
         healthTransform.localEulerAngles = new Vector3(0, 0, -angle);
         avatarTransform.localEulerAngles = new Vector3(0, 0, -angle);
+        emotionTransform.localEulerAngles = new Vector3(0, 0, -angle);
 
         float border = 70f;
         Vector3 targetPosScreenPoint = Camera.main.WorldToScreenPoint(targetPos);

@@ -13,11 +13,14 @@ public class CameraFollow : MonoBehaviour
     private bool cameraFullFollow;
     //private List<CamBorder> camBorder = new List<CamBorder>();
 
+    private DamageableCharacter piggleHealth;
+
     void Start()
     {
         cameraFullFollow = true;
         sizeOffset = GetComponent<Camera>().orthographicSize;
-       
+
+        piggleHealth = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DamageableCharacter>();
     }
 
     // Update is called once per frame
@@ -32,7 +35,10 @@ public class CameraFollow : MonoBehaviour
             VerticalFollowOnly();
         }
 
-        
+        if(piggleHealth.Health <= 0)
+        {
+            target = piggleHealth.gameObject.transform;
+        }
     }
 
     private void Update()

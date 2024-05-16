@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class NewbieMovement : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class NewbieMovement : MonoBehaviour
 
     [Header("Avatar")]
     [SerializeField] private bool dialogueScene;
+
+    [SerializeField] private GameObject piggleHealth;
 
     private bool avatarFollow;
 
@@ -42,6 +45,9 @@ public class NewbieMovement : MonoBehaviour
 
     private DialogueActivator dialogueActivator;
     private Transform player;
+
+    private Image healthBar;
+    private DamageableCharacter piggle;
     private void Awake()
     {
         detectionZone = transform.GetChild(0).GetComponent<DetectionZone>();
@@ -50,6 +56,7 @@ public class NewbieMovement : MonoBehaviour
         initPos = transform.position;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        piggle = GetComponent<DamageableCharacter>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -62,10 +69,13 @@ public class NewbieMovement : MonoBehaviour
         if (!dialogueScene)
         {
             dialogueActivator.enabled = false;
+            piggleHealth.SetActive(true);
+            healthBar = piggleHealth.transform.GetChild(1).GetComponent<Image>();
         }
         else
         {
             dialogueActivator.enabled = true;
+            piggleHealth.SetActive(false);
         }
     }
 
@@ -76,7 +86,9 @@ public class NewbieMovement : MonoBehaviour
             distMin = 3000f;
             target = transform;
         }
-        
+
+        if (!dialogueScene) healthBar.fillAmount = piggle.Health / piggle.MaxHealth;
+
         if (!stopMoving)
         {
             agent.isStopped = false;
@@ -85,6 +97,7 @@ public class NewbieMovement : MonoBehaviour
             if (dialogueScene)
             {
                 agent.SetDestination(player.position);
+                
             }
             else
             {
@@ -102,6 +115,8 @@ public class NewbieMovement : MonoBehaviour
 
                     distMin = 3000f;
                 }
+
+                
             }
         }
         else
