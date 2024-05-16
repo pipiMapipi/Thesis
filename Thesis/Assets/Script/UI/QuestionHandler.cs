@@ -15,6 +15,8 @@ public class QuestionHandler : MonoBehaviour
     private bool animStarted;
     private int index = 0;
 
+    private ResponseEvent[] responseEvents;
+
     private void Update()
     {
         if (tempQuestionButtons.Count != 0)
@@ -27,25 +29,34 @@ public class QuestionHandler : MonoBehaviour
             animStarted = false;
         }
     }
+
+    public void AddResponseEvents(ResponseEvent[] responseEvents)
+    {
+        this.responseEvents = responseEvents;
+    }
+
     public void ShowQuestions(Question[] questions)
     {
         
        
         for(int i = 0; i < questions.Length; i++)
         {
+            Question question = questions[i];
+            int currentIndex = i;
+
             GameObject questionButton = Instantiate(questionButtonTemplate.gameObject, questionContainer.transform.GetChild(i));
             questionButton.gameObject.SetActive(true);
             
-            questionButton.transform.GetChild(0).GetComponent<TMP_Text>().text = questions[i].QuestionText;
+            questionButton.transform.GetChild(0).GetComponent<TMP_Text>().text = question.QuestionText;
 
-            int currentIndex = i;
-            questionButton.GetComponent<Button>().onClick.AddListener(() => OnPickedQuestion(questions[currentIndex]));
+            
+            questionButton.GetComponent<Button>().onClick.AddListener(() => OnPickedQuestion(question, currentIndex));
 
             tempQuestionButtons.Add(questionButton);
         }
     }
 
-    private void OnPickedQuestion(Question question)
+    private void OnPickedQuestion(Question question, int questionIndex)
     {
         //questionContainer.gameObject.SetActive(false);
 
@@ -55,7 +66,22 @@ public class QuestionHandler : MonoBehaviour
         }
         tempQuestionButtons.Clear();
 
-        dialogueUI.ShowDialogue(question.DialogueObject);
+        if(responseEvents != null && questionIndex <= responseEvents.Length)
+        {
+            responseEvents[questionIndex].OnPickedResponse?.Invoke();
+        }
+
+        responseEvents = null;
+
+        if (question.DialogueObject)
+        {
+            dialogueUI.ShowDialogue(question.DialogueObject);
+        }
+        else
+        {
+            dialogueUI.CloseDialogueBox();
+        }
+        
     }
 
     private IEnumerator TriggerAnim()

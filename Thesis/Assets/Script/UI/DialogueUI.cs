@@ -13,21 +13,31 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Animator instructAnim;
 
     public bool IsOpen { get; private set; } // only this script can set whether it's open
+    public bool dialogueEnd;
 
     private TypeWriter typeWriter;
+
+    private DialogueActivator dialogueActivator;
     
     void Start()
     {
         typeWriter = GetComponent<TypeWriter>();
         CloseDialogueBox();
+
+        dialogueActivator = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DialogueActivator>();
     }
 
     public void ShowDialogue(DialogueObject dialogueObject)
     {
         IsOpen = true;
-        instructAnim.SetTrigger("Talk");
+        //instructAnim.SetTrigger("Talk");
         dialogueBox.SetActive(true);
         StartCoroutine(StepThroughDialogue(dialogueObject));
+    }
+
+    public void AddReponseEvents(ResponseEvent[] responseEvents)
+    {
+        questionHandler.AddResponseEvents(responseEvents);
     }
 
     private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
@@ -35,6 +45,7 @@ public class DialogueUI : MonoBehaviour
 
         for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
         {
+            
             string dialogue = dialogueObject.Dialogue[i];
             yield return RunTypingEffect(dialogue);
             dialogueText.text = dialogue;
@@ -45,13 +56,14 @@ public class DialogueUI : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift));
         }
 
-        if (dialogueObject.HasQuestions)
+        if (dialogueObject.HasQuestions && dialogueActivator.dialogueIndex != 0)
         {
             questionHandler.ShowQuestions(dialogueObject.Questions);
         }
         else
         {
             CloseDialogueBox();
+            dialogueEnd = true;
         }
         
     }
@@ -71,7 +83,7 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    private void CloseDialogueBox()
+    public void CloseDialogueBox()
     {
         IsOpen = false;
         dialogueBox.SetActive(false);

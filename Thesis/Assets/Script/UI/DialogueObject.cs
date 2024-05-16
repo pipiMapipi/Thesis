@@ -10,6 +10,14 @@ public class DialogueObject : ScriptableObject
 
     public string[] Dialogue => dialogue; // Read not overwrite
 
-    public bool HasQuestions => Questions != null && Questions.Length > 0;
-    public Question[] Questions => questions;
+    public bool HasQuestions => questions != null && questions.Length > 0;
+
+    public Question[] Questions
+    {
+        get => questions;
+        set
+        {
+            questions = value;
+        }
+    }
 }

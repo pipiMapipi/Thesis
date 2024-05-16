@@ -78,7 +78,7 @@ public class SwordHitBox : MonoBehaviour
 
                 StartCoroutine(FlowerGetHit(flowerAnim, flowerHealthBar, flowerHealth, flowerMaxHealth));
 
-                if (flowerHealth == 0)
+                if (flowerHealth <= 0)
                 {
                     GameObject flowerParent = collision.transform.parent.gameObject;
                     StartCoroutine(DestoryFlower(flowerAnim, flowerParent));
@@ -106,8 +106,12 @@ public class SwordHitBox : MonoBehaviour
     private IEnumerator DestoryFlower(Animator flower, GameObject flowerParent)
     {
         flower.SetBool("FadeOut", true);
-        piggleCommunica.taskSolved = true;
-        piggleCommunica.needClearFlower = false;
+        if (SceneManager.GetActiveScene().name == "combat")
+        {
+            piggleCommunica.taskSolved = true;
+            piggleCommunica.needClearFlower = false;
+        }
+            
         yield return new WaitForSeconds(2f);      
         Destroy(flowerParent);
     }

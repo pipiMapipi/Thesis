@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Nothing
   m_EditorClassIdentifier: 
   dialogue:
-  - ...
+  - 'That''s alright, we will figure things out. '
+  - All set? Let's go!
   questions: []

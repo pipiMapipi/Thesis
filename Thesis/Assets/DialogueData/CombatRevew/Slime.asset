@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  dialogue:
+  - What? Your weapon's not hurting the slimes? That's weird. It looks pretty cool
+    and powerful to me...
+  - "You saw shields pop up when you tried to hit them? Strange... I\u2019m not seeing
+    that on my end."
+  - "Wait, could it be because of that giant machine in the middle? I heard those
+    are powered by pieces of the Stone of Magic. Maybe that\u2019s how the Demon
+    King is boosting his monster army."
+  - "We\u2019ve gotta take down that machine! But first, we need to figure out a
+    way to get there."
+  - "No worries, though. My laser gun\u2019s working just fine. I\u2019ll handle
+    the slimes for now. I\u2019ve got your back!"
+  questions: []

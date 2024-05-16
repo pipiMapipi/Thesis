@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlowerZoneDetect : MonoBehaviour
 {
@@ -15,24 +16,28 @@ public class FlowerZoneDetect : MonoBehaviour
         flowerHealthAnim = transform.GetChild(1).GetComponent<Animator>();
         flowerHealthAnim.enabled = false;
 
-        piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+        if (SceneManager.GetActiveScene().name == "combat")  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(piggleWaitTime > 5f)
+        if (SceneManager.GetActiveScene().name == "combat")
         {
-            piggleCommunica.flowerPos = transform.position;
-            piggleCommunica.needClearFlower = true;
-        }
-        else
-        {
-            if (startWaiting)
+            if (piggleWaitTime > 5f)
             {
-                piggleWaitTime += Time.deltaTime;
+                piggleCommunica.flowerPos = transform.position;
+                piggleCommunica.needClearFlower = true;
+            }
+            else
+            {
+                if (startWaiting)
+                {
+                    piggleWaitTime += Time.deltaTime;
+                }
             }
         }
+            
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,7 +60,7 @@ public class FlowerZoneDetect : MonoBehaviour
             StartCoroutine(UIFadeOut());
         }
 
-        if (collision.CompareTag("Newbie"))
+        if (collision.CompareTag("Newbie") && SceneManager.GetActiveScene().name == "combat")
         {
             piggleWaitTime = 0f;
             startWaiting = false;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CameraFollow : MonoBehaviour
         cameraFullFollow = true;
         sizeOffset = GetComponent<Camera>().orthographicSize;
 
-        piggleHealth = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DamageableCharacter>();
+        if (SceneManager.GetActiveScene().name == "combat") piggleHealth = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DamageableCharacter>();
     }
 
     // Update is called once per frame
@@ -35,10 +36,14 @@ public class CameraFollow : MonoBehaviour
             VerticalFollowOnly();
         }
 
-        if(piggleHealth.Health <= 0)
+        if(SceneManager.GetActiveScene().name == "combat")
         {
-            target = piggleHealth.gameObject.transform;
+            if (piggleHealth.Health <= 0)
+            {
+                target = piggleHealth.gameObject.transform;
+            }
         }
+        
     }
 
     private void Update()

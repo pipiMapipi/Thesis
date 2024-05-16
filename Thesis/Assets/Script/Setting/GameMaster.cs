@@ -16,6 +16,14 @@ public class GameMaster : MonoBehaviour
 
     public static GameMaster instance;
 
+    [Header("Conversation")]
+    public bool communication;
+    public bool slim;
+
+    [Header("Audio")]
+    [SerializeField] private List<AudioClip> audioClip = new List<AudioClip>();
+    private AudioSource audioNow;
+
     private void Awake()
     {
         //if (instance == null)
@@ -29,6 +37,17 @@ public class GameMaster : MonoBehaviour
         //}
 
         //playerHealth = player.GetComponent<DamageableCharacter>();
+        audioNow = GetComponent<AudioSource>();
+        AudioControl();
+    }
+    private void Update()
+    {
+        if (!audioNow.isPlaying)
+        {
+            AudioControl();
+            audioNow.Play();
+        }
+       
     }
 
     public void DeathReset()
@@ -72,5 +91,23 @@ public class GameMaster : MonoBehaviour
 
         circleAnim.SetTrigger("Start");
         //circleMask.SetActive(false);
+    }
+
+    private void AudioControl()
+    {
+        if (SceneManager.GetActiveScene().name != "combat")
+        {
+            audioNow.clip = audioClip[0];
+        }
+        else
+        {
+            audioNow.clip = audioClip[1];
+            
+        }
+    }
+
+    public void ChangeToCombat()
+    {
+        SceneManager.LoadScene("combat");
     }
 }
