@@ -17,14 +17,14 @@ public class DialogueUI : MonoBehaviour
 
     private TypeWriter typeWriter;
 
-    private DialogueActivator dialogueActivator;
+    public DialogueActivator dialogueActivator;
     
     void Start()
     {
         typeWriter = GetComponent<TypeWriter>();
         CloseDialogueBox();
 
-        dialogueActivator = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DialogueActivator>();
+       
     }
 
     public void ShowDialogue(DialogueObject dialogueObject)

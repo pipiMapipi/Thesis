@@ -5,12 +5,12 @@ using UnityEngine;
 public class NewDialogueTrigger : MonoBehaviour
 {
     private PlayerMovement player;
-    private DialogueActivator dialogueActivator;
+    public DialogueActivator dialogueActivator;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        dialogueActivator = GameObject.FindGameObjectWithTag("Newbie").GetComponent<DialogueActivator>();
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

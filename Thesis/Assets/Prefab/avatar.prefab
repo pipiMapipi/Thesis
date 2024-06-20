@@ -1307,8 +1307,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005415678, y: 0}
-  m_Size: {x: 0.55, y: 0.79}
+  m_Offset: {x: -0.005415678, y: -0.02}
+  m_Size: {x: 0.49, y: 0.74}
   m_Direction: 0
 --- !u!50 &7556712271735700444
 Rigidbody2D:
@@ -2091,19 +2091,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1926615671423757980, guid: bd431ac19b18754418d19959e6de3963, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
-      value: 0.006349981
+      value: 0.004450023
       objectReference: {fileID: 0}
     - target: {fileID: 1926615671423757980, guid: bd431ac19b18754418d19959e6de3963, type: 3}
       propertyPath: m_LocalBounds.m_Center.y
-      value: -0.007950008
+      value: 0.0014500022
       objectReference: {fileID: 0}
     - target: {fileID: 1926615671423757980, guid: bd431ac19b18754418d19959e6de3963, type: 3}
       propertyPath: m_LocalBounds.m_Extent.x
-      value: 1.8320501
+      value: 1.8310499
       objectReference: {fileID: 0}
     - target: {fileID: 1926615671423757980, guid: bd431ac19b18754418d19959e6de3963, type: 3}
       propertyPath: m_LocalBounds.m_Extent.y
-      value: 1.8282499
+      value: 1.8340499
       objectReference: {fileID: 0}
     - target: {fileID: 2479641310021929817, guid: bd431ac19b18754418d19959e6de3963, type: 3}
       propertyPath: m_Name
