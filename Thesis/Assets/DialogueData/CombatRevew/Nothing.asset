@@ -15,4 +15,6 @@ MonoBehaviour:
   dialogue:
   - 'That''s alright, we will figure things out. '
   - All set? Let's go!
-  questions: []
+  questions:
+  - {fileID: 11400000, guid: 74b5cc559172f354ebb36a866dda48f7, type: 2}
+  - {fileID: 11400000, guid: 2afd0a31b8eb2114b851f60db089fdcd, type: 2}

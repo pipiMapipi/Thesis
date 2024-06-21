@@ -89,7 +89,7 @@ public class QuestionHandler : MonoBehaviour
         animStarted = true;
         while (index < tempQuestionButtons.Count)
         {
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             tempQuestionButtons[index].GetComponent<Animator>().SetTrigger("PopUp");
             index += 1;
         }

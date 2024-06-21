@@ -70,13 +70,20 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
     {
         foreach(DialogueResponseEvents responseEvents in GetComponents<DialogueResponseEvents>())
         {
-            if(responseEvents.DialogueObject == dialogueObject[dialogueIndex])
+            if (responseEvents.DialogueObject == dialogueObject[dialogueIndex])
             {
+                
                 player.DialogueUI.AddReponseEvents(responseEvents.Events);
                 break;
             }
         }
-        if(dialogueObject[dialogueIndex].Questions.Length == 0) dialogueObject[dialogueIndex].Questions = questionsToSet.ToArray();
+        if(dialogueObject[dialogueIndex].Questions.Length == 0)
+        {
+            questionsToSet.Add(dialogueObject[dialogueIndex].Questions[0]);
+            dialogueObject[dialogueIndex].Questions = questionsToSet.ToArray();
+            
+        }
+            
 
         player.DialogueUI.ShowDialogue(dialogueObject[dialogueIndex]);
 

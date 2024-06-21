@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: QCombatYes
   m_EditorClassIdentifier: 
   questionText: Yes
-  dialogueObject: {fileID: 0}
+  dialogueObject: {fileID: 11400000, guid: ebdd95aa2a1ba7f4faea562dbf94da57, type: 2}
