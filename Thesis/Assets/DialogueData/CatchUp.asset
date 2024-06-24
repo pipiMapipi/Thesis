@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
-  m_Name: Nothing
+  m_Name: CatchUp
   m_EditorClassIdentifier: 
   dialogue:
-  - 'That''s alright, we will figure things out. '
+  - Ugh...you really are a fast walker.
+  - 'Me? I am hanging in there. '
+  - "Sorry for the turtle pace, but I\u2019ll catch up."
   questions: []
-  rootDialogue: 0

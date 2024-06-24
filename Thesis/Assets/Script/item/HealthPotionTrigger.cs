@@ -13,7 +13,7 @@ public class HealthPotionTrigger : MonoBehaviour
     private float triggerAmount = 0.6f;
     [SerializeField] private bool canDrop;
     private Vector3 velocity = Vector3.zero;
-    private float smoothTime = 0.25f;
+    private float smoothTime = 0.1f;
     private Transform target;
     private Animator anim;
     private bool getNow;
@@ -66,7 +66,7 @@ public class HealthPotionTrigger : MonoBehaviour
             {
                 potion.transform.position = Vector3.SmoothDamp(potion.transform.position, (Vector2)target.position, ref velocity, smoothTime);
                 float dist = Vector2.Distance((Vector2)potion.transform.position, (Vector2)target.position);
-                if (dist < 0.1f)
+                if (dist < 0.2f)
                 {
                     anim.SetTrigger("Cure");
                     StartCoroutine(AddToEntityHealth());
@@ -81,13 +81,13 @@ public class HealthPotionTrigger : MonoBehaviour
 
     IEnumerator IncreaseHealth()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         getNow = true;   
     }
 
     IEnumerator AddToEntityHealth()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         float health = target.GetComponent<DamageableCharacter>().Health;
         float maxHealth = target.GetComponent<DamageableCharacter>().MaxHealth;

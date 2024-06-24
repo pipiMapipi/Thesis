@@ -35,11 +35,11 @@ public class QuestionHandler : MonoBehaviour
         this.responseEvents = responseEvents;
     }
 
-    public void ShowQuestions(Question[] questions)
+    public void ShowQuestions(List<Question> questions)
     {
         
        
-        for(int i = 0; i < questions.Length; i++)
+        for(int i = 0; i < questions.Count; i++)
         {
             Question question = questions[i];
             int currentIndex = i;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
-  m_Name: Text
+  m_Name: Intro
   m_EditorClassIdentifier: 
   dialogue:
   - "Sorry, I wasn\u2019t supposed to... Oh hi, it\u2019s you! How have things been
@@ -28,7 +28,7 @@ MonoBehaviour:
   - "Uh, just look at this weapon that I got! I am still getting used to it, but
     I can feel its power there. \nWith my weapon and your skills, we\u2019re gonna
     nail every combat. "
-  - "But if you are not feeling comfortable, it\u2019s totally... Wait, what? You
-    said that I\u2019m in? That\u2019s... that\u2019s so nice of you! I won\u2019t
-    let you down."
-  - Anyhow, I am really glad to see you again!
+  - "But if you are not feeling comfortable, it\u2019s totally... "
+  questions:
+  - {fileID: 11400000, guid: 9902522d59fe4744bab1ecf961fc1182, type: 2}
+  rootDialogue: 0

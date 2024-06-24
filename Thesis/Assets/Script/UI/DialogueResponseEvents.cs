@@ -13,18 +13,18 @@ public class DialogueResponseEvents : MonoBehaviour
     {
         if (dialogueObject == null) return;
         if (dialogueObject.Questions == null) return;
-        if (events != null && events.Length == dialogueObject.Questions.Length) return;
+        if (events != null && events.Length == dialogueObject.Questions.Count) return;
 
         if(events == null)
         {
-            events = new ResponseEvent[dialogueObject.Questions.Length];
+            events = new ResponseEvent[dialogueObject.Questions.Count];
         }
         else
         {
-            Array.Resize(ref events, dialogueObject.Questions.Length);
+            Array.Resize(ref events, dialogueObject.Questions.Count);
         }
 
-        for(int i = 0; i < dialogueObject.Questions.Length; i++)
+        for(int i = 0; i < dialogueObject.Questions.Count; i++)
         {
             Question question = dialogueObject.Questions[i];
 

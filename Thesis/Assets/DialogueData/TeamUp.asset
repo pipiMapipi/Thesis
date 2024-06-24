@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
-  m_Name: Nothing
+  m_Name: TeamUp
   m_EditorClassIdentifier: 
   dialogue:
-  - 'That''s alright, we will figure things out. '
+  - "Wait, what? You said that I\u2019m in? That\u2019s... that\u2019s so nice of
+    you! I won\u2019t let you down."
+  - Let's get going! I'll follow you.
   questions: []
   rootDialogue: 0

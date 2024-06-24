@@ -28,6 +28,7 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
     {
         anim = dialogueInstruct.GetComponent<Animator>();
 
+
         for(int i = 0; i < questionActive.Count; i++)
         {
             if (questionActive[i])
@@ -36,9 +37,9 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
             }
         }
 
-        if (SceneManager.GetActiveScene().name == "Dialogue") {
-            dialogueIndex = 0;
-        }
+        //if (SceneManager.GetActiveScene().name == "Dialogue") {
+        //    dialogueIndex = 0;
+        //}
         
 
         piggle = GameObject.FindGameObjectWithTag("Newbie").GetComponent<NewbieMovement>();
@@ -72,16 +73,17 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
         {
             if (responseEvents.DialogueObject == dialogueObject[dialogueIndex])
             {
-                
                 player.DialogueUI.AddReponseEvents(responseEvents.Events);
                 break;
             }
         }
-        if(dialogueObject[dialogueIndex].Questions.Length == 0)
+        if(dialogueObject[dialogueIndex].Questions.Count == 1 && dialogueObject[dialogueIndex].RootDialogue)
         {
-            questionsToSet.Add(dialogueObject[dialogueIndex].Questions[0]);
-            dialogueObject[dialogueIndex].Questions = questionsToSet.ToArray();
-            
+            //questionsToSet.Add(dialogueObject[dialogueIndex].Questions[0]);
+            //dialogueObject[dialogueIndex].Questions = questionsToSet.ToArray();
+            dialogueObject[dialogueIndex].Questions.AddRange(questionsToSet);
+
+
         }
             
 

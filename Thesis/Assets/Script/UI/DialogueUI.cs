@@ -56,7 +56,7 @@ public class DialogueUI : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift));
         }
 
-        if (dialogueObject.HasQuestions && dialogueActivator.dialogueIndex != 0)
+        if (dialogueObject.HasQuestions)
         {
             questionHandler.ShowQuestions(dialogueObject.Questions);
         }

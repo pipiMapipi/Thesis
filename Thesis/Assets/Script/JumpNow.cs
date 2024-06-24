@@ -14,12 +14,12 @@ public class JumpNow : MonoBehaviour
     [Header("Player Sprites")]
     [SerializeField] private Animator playerJump;
     private SpriteRenderer playerDefault;
-    
 
     private Transform player;
     private PlayerMovement playerMovement;
     private Vector2 initPos;
-    private bool jumpEnabled;
+
+    public bool jumpEnabled;
 
     private Vector2 direction;
 
@@ -36,16 +36,14 @@ public class JumpNow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-        
-
+ 
         if (Input.GetKeyDown(KeyCode.J) && jumpEnabled)
         {
             jumpEnabled = false;
             initPos = transform.position;
             StartCoroutine(Jump());
         }
+
     }
 
     private IEnumerator Jump()

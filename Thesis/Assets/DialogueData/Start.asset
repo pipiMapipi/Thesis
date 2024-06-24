@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
-  m_Name: Nothing
+  m_Script: {fileID: 11500000, guid: e8dad93e9cb652447b56170cff9a14c9, type: 3}
+  m_Name: Start
   m_EditorClassIdentifier: 
-  dialogue:
-  - 'That''s alright, we will figure things out. '
-  questions: []
-  rootDialogue: 0
+  questionText: ...
+  dialogueObject: {fileID: 11400000, guid: bbee5b0669c40334c9ad5bb6cbd224aa, type: 2}
