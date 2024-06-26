@@ -8,10 +8,11 @@ public class HealthPotionTrigger : MonoBehaviour
     public GameObject potion;
 
     [SerializeField] private bool randomDrop;
+    public bool canDrop;
 
     private Slime slime;
     private float triggerAmount = 0.6f;
-    [SerializeField] private bool canDrop;
+    
     private Vector3 velocity = Vector3.zero;
     private float smoothTime = 0.1f;
     private Transform target;
@@ -21,7 +22,7 @@ public class HealthPotionTrigger : MonoBehaviour
     private bool posInfoStored;
     private Vector2 posOffset = new Vector2(0, 1.2f);
 
-    void Start()
+    void Awake()
     {
         if (randomDrop)
         {

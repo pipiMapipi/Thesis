@@ -16,6 +16,8 @@ TagManager:
   - Flower
   - PiggleSign
   - SlimeTeam
+  - SlimePrefab
+  - Machine
   layers:
   - Default
   - TransparentFX

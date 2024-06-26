@@ -32,6 +32,11 @@ public class SwordHitBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Machine"))
+        {
+            player.GetComponent<IDamageable>().Health -= 1000f;
+        }
+        
         if (collision.CompareTag("Monster"))
         {
             // check if there is IDamageable in the script of the gameobject
