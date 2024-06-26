@@ -137,9 +137,10 @@ public class BeamAttack : MonoBehaviour
 
 
                     float enemyHealth = hit.collider.transform.GetComponent<DamageableCharacter>().Health;
-                    if (enemyHealth == 0)
+                    if (enemyHealth <= 0)
                     {
                         newbie.GetComponent<DamageableCharacter>().Aggro += 1f;
+                        GameMaster.slimePiggle++;
                     }
 
                 }

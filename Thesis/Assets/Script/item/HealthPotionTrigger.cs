@@ -20,6 +20,7 @@ public class HealthPotionTrigger : MonoBehaviour
     private float healthAmount = 30f;
     private bool posInfoStored;
     private Vector2 posOffset = new Vector2(0, 1.2f);
+
     void Start()
     {
         if (randomDrop)
@@ -83,6 +84,7 @@ public class HealthPotionTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         getNow = true;   
+        
     }
 
     IEnumerator AddToEntityHealth()
@@ -105,6 +107,9 @@ public class HealthPotionTrigger : MonoBehaviour
         {
             target.GetComponent<DamageableCharacter>().cureAnim.SetActive(true);
         }
+
+        if (randomDrop) GameMaster.potionPiggle++;
+        else GameMaster.potionPlayer++;
 
         Destroy(this);
     }

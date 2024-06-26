@@ -15,6 +15,7 @@ TagManager:
   - CamBorder
   - Flower
   - PiggleSign
+  - SlimeTeam
   layers:
   - Default
   - TransparentFX

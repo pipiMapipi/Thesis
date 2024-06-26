@@ -56,9 +56,10 @@ public class SeedCollider : MonoBehaviour
                 slime.lastHitObject = "Newbie";
 
                 float enemyHealth = enemy.transform.GetComponent<DamageableCharacter>().Health;
-                if (enemyHealth == 0)
+                if (enemyHealth <= 0)
                 {
                     newbie.GetComponent<DamageableCharacter>().Aggro += 1f;
+                    GameMaster.slimePiggle++;
                 }
             }
             else

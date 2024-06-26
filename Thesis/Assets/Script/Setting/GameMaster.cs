@@ -24,6 +24,18 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private List<AudioClip> audioClip = new List<AudioClip>();
     private AudioSource audioNow;
 
+    [Header("Score Track")]
+    public static int slimeSum;
+    public static int slimePlayer;
+    public static int slimePiggle;
+    public static int potionPlayer;
+    public static int potionPiggle;
+    public int slimeSum0;
+    public int slimePlayer0;
+    public  int slimePiggle0;
+    public  int potionPlayer0;
+    public  int potionPiggle0;
+
     private void Awake()
     {
         //if (instance == null)
@@ -39,6 +51,15 @@ public class GameMaster : MonoBehaviour
         //playerHealth = player.GetComponent<DamageableCharacter>();
         audioNow = GetComponent<AudioSource>();
         AudioControl();
+
+        if (SceneManager.GetActiveScene().name == "combat")
+        {
+            slimeSum = GameObject.FindGameObjectWithTag("SlimeTeam").transform.childCount;
+            slimePlayer = 0;
+            slimePiggle = 0;
+            potionPlayer = 0;
+            potionPiggle = 0;
+        }
     }
     private void Update()
     {
@@ -47,7 +68,14 @@ public class GameMaster : MonoBehaviour
             AudioControl();
             audioNow.Play();
         }
-       
+
+        if (SceneManager.GetActiveScene().name == "combat") TrackCombat();
+
+        slimePiggle0 = slimePiggle;
+        slimeSum0 = slimeSum;
+        slimePlayer0 = slimePlayer;
+        potionPiggle0 = potionPiggle;
+        potionPlayer0 = potionPlayer;
     }
 
     public void DeathReset()
@@ -84,8 +112,8 @@ public class GameMaster : MonoBehaviour
         
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //playerZoomPos = lastCheckPointPos;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //SceneManager.LoadScene("combat");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("score");
 
 
 
@@ -109,5 +137,10 @@ public class GameMaster : MonoBehaviour
     public void ChangeToCombat()
     {
         SceneManager.LoadScene("combat");
+    }
+
+    private void TrackCombat()
+    {
+
     }
 }
