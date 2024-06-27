@@ -152,11 +152,17 @@ MonoBehaviour:
   playerZoomPos: {x: 0, y: 0}
   circleAnim: {fileID: 3768827438690164656}
   circleMask: {fileID: 9205560067755957056}
-  communication: 0
-  slim: 0
   audioClip:
   - {fileID: 8300000, guid: 232c262e5de961b429ed5f289b233254, type: 3}
   - {fileID: 8300000, guid: 1db7674696b4079439d336a1bcd966e3, type: 3}
+  slimeSum0: 0
+  slimePlayer0: 0
+  slimePiggle0: 0
+  potionPlayer0: 0
+  potionPiggle0: 0
+  potionCanDrop0: 0
+  communication: {fileID: 0}
+  communicationIcon: {fileID: 0}
 --- !u!82 &6398070172522964461
 AudioSource:
   m_ObjectHideFlags: 0

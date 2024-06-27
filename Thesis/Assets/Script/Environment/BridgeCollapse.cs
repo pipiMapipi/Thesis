@@ -29,6 +29,7 @@ public class BridgeCollapse : MonoBehaviour
                 collapseAnim.SetTrigger("collapse");
                 DamageableCharacter damageableCharacter = collision.GetComponent<DamageableCharacter>();
                 damageableCharacter.Health -= 1000f;
+                GameMaster.needBridge = true;
             }
             else
             {

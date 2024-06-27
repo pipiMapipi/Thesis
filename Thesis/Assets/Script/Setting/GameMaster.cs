@@ -16,10 +16,6 @@ public class GameMaster : MonoBehaviour
 
     public static GameMaster instance;
 
-    [Header("Conversation")]
-    public bool communication;
-    public bool slim;
-
     [Header("Audio")]
     [SerializeField] private List<AudioClip> audioClip = new List<AudioClip>();
     private AudioSource audioNow;
@@ -42,6 +38,20 @@ public class GameMaster : MonoBehaviour
     public  int potionPiggle0;
     public int potionCanDrop0;
 
+    public static bool needCommunication;
+    public static bool needSlime;
+    public static bool needJump;
+    public static bool needFountain;
+    public static bool needBridge;
+
+    public static int deathTime;
+
+    [Header("Conversation")]
+    [SerializeField] private GameObject communication;
+    [SerializeField] private GameObject communicationIcon;
+    public static bool commTriggered;
+
+    public static bool machineIsGone;
     private void Awake()
     {
         //if (instance == null)
@@ -93,7 +103,20 @@ public class GameMaster : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Dialogue");
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Home");
+            deathTime = 0;
+            commTriggered = false;
+            needFountain = false;
+            needBridge = false;
+            needJump = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         if (!audioNow.isPlaying)
         {
@@ -101,7 +124,7 @@ public class GameMaster : MonoBehaviour
             audioNow.Play();
         }
 
-        if (SceneManager.GetActiveScene().name == "combat") TrackCombat();
+        TrackCombat();
         
 
         slimePiggle0 = slimePiggle;
@@ -151,11 +174,12 @@ public class GameMaster : MonoBehaviour
 
         //player.transform.position = lastCheckPointPos;
         //yield return new WaitForSeconds(1f);
-        
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //playerZoomPos = lastCheckPointPos;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene("score");
+        deathTime++;
+        SceneManager.LoadScene("Score");
 
 
 
@@ -176,6 +200,11 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    public void NextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void ChangeToCombat()
     {
         SceneManager.LoadScene("combat");
@@ -188,6 +217,41 @@ public class GameMaster : MonoBehaviour
 
     private void TrackCombat()
     {
+        // Communication
+        if(deathTime == 1)
+        {
+            needCommunication = true;
+            commTriggered = true;
+        }else
+        {
+            needCommunication = false;
+            
+        }
+
+        if (SceneManager.GetActiveScene().name == "combat")
+        {
+            if (commTriggered)
+            {
+                communication.SetActive(true);
+                communicationIcon.SetActive(true);
+            }
+            else
+            {
+                communication.SetActive(false);
+                communicationIcon.SetActive(false);
+            }
+        }
+
+        // Slime
+        if (deathTime >= 1)
+        {
+            needSlime = true;
+        }else
+        {
+            needSlime = false;
+        }
+
+        // Fountain
 
     }
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d681f77eb849abc4fb25a1e7884e9b1b, type: 3}
+  m_Name: Fountain
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Whoa, two monsters jumped out and knocked you off when you tried to smash the
+    piece above the magic fountain?
+  - People are saying the Demon King has some bodyguards watching over those Magic
+    Stones. He's really not taking any chances...
+  - "Next time, I'll come along and we can take them down together. Hang in there,
+    though! I might be a bit slow getting there \u2013 these pesky slimes are all
+    over the place!"
+  questions: []
+  rootDialogue: 0

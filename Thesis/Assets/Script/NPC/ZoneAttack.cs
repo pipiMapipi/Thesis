@@ -54,7 +54,7 @@ public class ZoneAttack : MonoBehaviour
         newbieMovement = GetComponent<NewbieMovement>();
         trapAttack = panicZoneAttack.GetComponent<TrapAttack>();
 
-        if (SceneManager.GetActiveScene().name == "combat")
+        if (SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)
         {
             piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
             piggleCommunica.needRescue = false;
@@ -109,7 +109,7 @@ public class ZoneAttack : MonoBehaviour
         if(CEDZ > CPborder * BEDZ * HP)
         {
             newbieMovement.stopMoving = true;
-            piggleCommunica.needRescue = true;
+            if (GameMaster.commTriggered) piggleCommunica.needRescue = true;
 
             comfortZoneAttack.SetActive(false);
             panicZoneAttack.SetActive(true);
@@ -119,8 +119,12 @@ public class ZoneAttack : MonoBehaviour
         else if (CEDZ <= CPborder * BEDZ * HP && !trapAttack.trapActive)
         {
             newbieMovement.stopMoving = false;
-            piggleCommunica.taskSolved = true;
-            piggleCommunica.needRescue = false;
+            if (GameMaster.commTriggered)
+            {
+                piggleCommunica.taskSolved = true;
+                piggleCommunica.needRescue = false;
+            }
+            
             
 
             comfortZoneAttack.SetActive(true);

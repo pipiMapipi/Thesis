@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Communication
   m_EditorClassIdentifier: 
   dialogue:
-  - Communication
+  - We need to communicate more? I was thinking the same thing! But it's hard to
+    chat with all these slimes around.
+  - How about we leave signals for each other? That way, we'll know what the other
+    needs even if we're far apart.
+  - "You like the idea? Let\u2019s give it a try then."
   questions: []
+  rootDialogue: 0

@@ -16,13 +16,13 @@ public class FlowerZoneDetect : MonoBehaviour
         flowerHealthAnim = transform.GetChild(1).GetComponent<Animator>();
         flowerHealthAnim.enabled = false;
 
-        if (SceneManager.GetActiveScene().name == "combat")  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+        if (SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "combat")
+        if (SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)
         {
             if (piggleWaitTime > 5f)
             {
@@ -60,7 +60,7 @@ public class FlowerZoneDetect : MonoBehaviour
             StartCoroutine(UIFadeOut());
         }
 
-        if (collision.CompareTag("Newbie") && SceneManager.GetActiveScene().name == "combat")
+        if (collision.CompareTag("Newbie") && SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)
         {
             piggleWaitTime = 0f;
             startWaiting = false;

@@ -20,7 +20,7 @@ public class SwordHitBox : MonoBehaviour
         swordCollider = gameObject.GetComponent<Collider2D>();
         player = transform.parent.transform;
 
-        if (SceneManager.GetActiveScene().name == "combat")  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
+        if (SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)  piggleCommunica = GameObject.FindGameObjectWithTag("PiggleSign").GetComponent<PiggleCommunica>();
     }
 
     // Update is called once per frame
@@ -32,9 +32,10 @@ public class SwordHitBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Machine"))
+        if (collision.CompareTag("Machine") && !GameMaster.machineIsGone)
         {
             player.GetComponent<IDamageable>().Health -= 1000f;
+            GameMaster.needFountain = true;
         }
         
         if (collision.CompareTag("Monster"))
@@ -50,13 +51,22 @@ public class SwordHitBox : MonoBehaviour
                 Vector2 knockback = direction * knockbackForce;
 
                 //collision.SendMessage("OnHit", swordDamage, knockback);
-                damageableObject.OnHit(knockback);
+                if (!GameMaster.machineIsGone)
+                {
+                    damageableObject.OnHit(knockback);
+                }
+                else
+                {
+                    damageableObject.OnHit(swordDamage, knockback);
+                }
+                
                 slime.lastHitObject = "Player";
 
                 float enemyHealth = collision.transform.GetComponent<DamageableCharacter>().Health;
                 if(enemyHealth == 0)
                 {
                     player.GetComponent<DamageableCharacter>().Aggro += 1f;
+                    GameMaster.slimePlayer++;
                 }
             }
             else
@@ -111,7 +121,7 @@ public class SwordHitBox : MonoBehaviour
     private IEnumerator DestoryFlower(Animator flower, GameObject flowerParent)
     {
         flower.SetBool("FadeOut", true);
-        if (SceneManager.GetActiveScene().name == "combat")
+        if (SceneManager.GetActiveScene().name == "combat" && GameMaster.commTriggered)
         {
             piggleCommunica.taskSolved = true;
             piggleCommunica.needClearFlower = false;

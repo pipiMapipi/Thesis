@@ -14,6 +14,9 @@ public class NewbieMovement : MonoBehaviour
 
     [SerializeField] private GameObject piggleHealth;
 
+    [Header("Communication Icon")]
+    [SerializeField] private CommunictionIconTrigger communictionIconTrigger;
+
     private bool avatarFollow;
 
     //[Header("Enemies")]
@@ -185,8 +188,25 @@ public class NewbieMovement : MonoBehaviour
             dist = Vector2.Distance((Vector2)transform.position, (Vector2)enemy.transform.position);
             if(dist < distMin && enemy.GetComponent<Collider2D>() != null)
             {
-                distMin = dist;
-                target = enemy.transform;
+                if (!GameMaster.commTriggered)
+                {
+                    distMin = dist;
+                    target = enemy.transform;
+                }
+                else
+                {
+                    if (!communictionIconTrigger.signDropped)
+                    {
+                        distMin = dist;
+                        target = enemy.transform;
+                    }
+                    else
+                    {
+                        target = communictionIconTrigger.signPos;
+                    }
+                }
+                
+                
             }
         }
 

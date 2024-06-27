@@ -26,6 +26,15 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Reborn")
+        {
+            questionActive[0] = GameMaster.needCommunication;
+            questionActive[1] = GameMaster.needSlime;
+            questionActive[2] = GameMaster.needJump;
+            questionActive[3] = GameMaster.needFountain;
+            questionActive[4] = GameMaster.needBridge;
+        }
+
         anim = dialogueInstruct.GetComponent<Animator>();
 
 
@@ -44,6 +53,11 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
 
         piggle = GameObject.FindGameObjectWithTag("Newbie").GetComponent<NewbieMovement>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
+        if(dialogueObject[dialogueIndex].RootDialogue && dialogueObject[dialogueIndex].Questions.Count > 1)
+        {
+            dialogueObject[dialogueIndex].Questions.RemoveRange(1, dialogueObject[dialogueIndex].Questions.Count-1);
+        }
     }
 
     private void Update()
@@ -60,6 +74,8 @@ public class DialogueActivator : MonoBehaviour, PlayerInteractable
                 emotions.GetChild(i).gameObject.SetActive(false);
             }
         }
+
+        
     }
 
     public void UpdateDialogueObject(DialogueObject dialogueObject)

@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Jump
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Jump
-
-'
+  - 'I don''t think I can jump over the river. You can probably tell I''ve got short
+    legs! The river''s just too wide for me. '
+  - 'It''s not about being brave or hardworking. I''ve tried several times, but I
+    always end up falling in and getting washed downstream. Trust me, those are some
+    painful memories. '
+  - 'If you find another way for me to get across, let me know. I''ll keep looking
+    for a way too. '
   questions: []
+  rootDialogue: 0

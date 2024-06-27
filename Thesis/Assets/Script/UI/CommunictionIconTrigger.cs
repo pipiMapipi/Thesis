@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class CommunictionIconTrigger : MonoBehaviour
 {
+    public bool signDropped;
+    public Transform signPos;
+    public bool clearSign;
+    public float piggleWaitTime;
+
     private Transform player;
     private bool dropSignEnabled;
+
+    
+    private Transform Piggle;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        Piggle = GameObject.FindGameObjectWithTag("Newbie").transform;
         dropSignEnabled = true;
 
     }
@@ -16,6 +25,18 @@ public class CommunictionIconTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (signDropped && Vector2.Distance(Piggle.position, signPos.position) < 3f)
+        {
+            if (piggleWaitTime > 3f)
+            {
+                clearSign = true;
+            }
+            else
+            {
+                piggleWaitTime += Time.deltaTime;
+            }
+        }
+
         if (dropSignEnabled)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -44,5 +65,7 @@ public class CommunictionIconTrigger : MonoBehaviour
         thisSign.gameObject.SetActive(true);
         thisSign.position = currentPos;
         dropSignEnabled = true;
+        signDropped = true;
+        signPos = thisSign; ;
     }
 }

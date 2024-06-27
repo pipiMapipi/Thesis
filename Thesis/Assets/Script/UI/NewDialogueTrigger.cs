@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewDialogueTrigger : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class NewDialogueTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && SceneManager.GetActiveScene().name == "Dialogue")
         {
             player.DialogueUI.dialogueEnd = false;
             dialogueActivator.dialogueTrigger = true;

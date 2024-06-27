@@ -28,7 +28,11 @@ public class HealthPotionTrigger : MonoBehaviour
         {
             slime = entity.GetComponent<Slime>();
             if (slime.potionProb >= triggerAmount) canDrop = true;
-            target = GameObject.FindGameObjectWithTag("Newbie").transform;
+            if (!GameMaster.machineIsGone)
+            {
+                target = GameObject.FindGameObjectWithTag("Newbie").transform;
+            }
+            
         }
         else
         {
@@ -60,7 +64,14 @@ public class HealthPotionTrigger : MonoBehaviour
             potion.transform.position = (Vector2) entity.transform.position + posOffset;
         }
 
+        if (randomDrop)
+        {
+            if (GameMaster.machineIsGone)
+            {
+                target = GameObject.FindGameObjectWithTag("Player").transform;
+            }
 
+        }
 
         if (anim.enabled)
         {
@@ -109,7 +120,7 @@ public class HealthPotionTrigger : MonoBehaviour
             target.GetComponent<DamageableCharacter>().cureAnim.SetActive(true);
         }
 
-        if (randomDrop) GameMaster.potionPiggle++;
+        if (target.CompareTag("Newbie")) GameMaster.potionPiggle++;
         else GameMaster.potionPlayer++;
 
         Destroy(this);
